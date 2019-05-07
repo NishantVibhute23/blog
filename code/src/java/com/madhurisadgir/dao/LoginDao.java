@@ -71,4 +71,29 @@ public class LoginDao {
         return userBean;
     }
 
+    public UserBean isUserExist(String emailId) {
+        UserBean userBean = new UserBean();
+        try {
+            con = db.getConnection();
+            PreparedStatement ps = con.prepareStatement("call userExist(?,?)");
+            ps.setString(1, emailId);
+            ps.setInt(2, UserType.USER.getId());
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                userBean.setUserId(rs.getInt(1));
+                userBean.setUserName(rs.getString(2));
+                userBean.setUseremailId(rs.getString(3));
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            db.closeConnection(con);
+        }
+        return userBean;
+    }
+
 }

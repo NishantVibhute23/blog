@@ -26,6 +26,18 @@
         <action name="forgotUserPass" class = "com.madhurisadgir.redirect.Login" method = "forgotUserPass">
             <result name = "success"> forgot.jsp </result>
         </action>
+        <action name="forgotPasswordSendEmail" class = "com.madhurisadgir.redirect.Login" method = "forgotPasswordSendEmail">
+            <result name = "success"> forgot.jsp </result>
+            <result name = "error"> forgot.jsp </result>
+        </action>
+        <action name="password" class="com.madhurisadgir.redirect.Login" method="redirect">
+            <result name="displayChangePassword">changePassword.jsp</result>
+            <result name="success">login.jsp</result>
+        </action>
+        <action name="changePassword" class="com.madhurisadgir.redirect.Login" method="changePassword">
+            <result name="displayChangePassword">changePassword.jsp</result>
+            <result name="success">login.jsp</result>
+        </action>
     </package>
 </struts>
 

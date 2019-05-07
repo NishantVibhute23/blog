@@ -10,9 +10,27 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Forgot Page</title>
     </head>
     <body>
-        <h1>Forgot Page</h1>
-    </body>
+        <s:form action="forgotPasswordSendEmail">
+            <s:if test="type.equals('sent')">
+                <s:property value="mssg"/>
+            </s:if>
+            <s:else>
+                <div class="label">Enter Registered Mail</div>
+                <div class="input-field"><s:textfield name="userBean.useremailId" required="required"/></div>
+            </div>
+            <div class="login-button">
+                <a href="javascript:document.forms[0].submit();"><div class="button-login">OK </div></a>
+
+            </div>
+        </div>
+    </s:else>
+
+</div>
+</div>
+
+</s:form>
+</body>
 </html>
