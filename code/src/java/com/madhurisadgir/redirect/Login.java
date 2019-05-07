@@ -10,15 +10,19 @@ import com.madhurisadgir.bean.UserBean;
 import com.madhurisadgir.dao.LoginDao;
 import com.madhurisadgir.util.CommonUtil;
 import com.opensymphony.xwork2.ActionSupport;
+import java.util.Map;
+import org.apache.struts2.dispatcher.SessionMap;
+import org.apache.struts2.interceptor.SessionAware;
 
 /**
  *
  * @author nishant.vibhute
  */
-public class Login extends ActionSupport {
+public class Login extends ActionSupport implements SessionAware {
 
     UserBean userBean = new UserBean();
     MessageBean messageBean = new MessageBean();
+    private SessionMap<String, Object> sessionMap;
 
     public Login() {
     }
@@ -45,6 +49,36 @@ public class Login extends ActionSupport {
         return returntype;
     }
 
+    public String loginUser() {
+        LoginDao loginDao = new LoginDao();
+        UserBean userBean1 = loginDao.loginUser(userBean);
+        String returntype = ActionSupport.ERROR;
+        if (userBean1.getUserName() != null) {
+            sessionMap.put("login", "true");
+            sessionMap.put("userBean", userBean1);
+            returntype = ActionSupport.SUCCESS;
+        } else {
+            messageBean.setSuccessMessage(CommonUtil.getResourceProperty("message.user.login.failure"));
+            returntype = ActionSupport.ERROR;
+        }
+        return returntype;
+    }
+
+    public String forgotUserPass() {
+        String returntype = ActionSupport.SUCCESS;
+        return returntype;
+    }
+
+    public String logoutUser() {
+        String returntype = ActionSupport.ERROR;
+        if (sessionMap != null) {
+            sessionMap.invalidate();
+            messageBean.setSuccessMessage(CommonUtil.getResourceProperty("message.user.logout.success"));
+            returntype = ActionSupport.SUCCESS;
+        }
+        return returntype;
+    }
+
     public UserBean getUserBean() {
         return userBean;
     }
@@ -59,6 +93,19 @@ public class Login extends ActionSupport {
 
     public void setMessageBean(MessageBean messageBean) {
         this.messageBean = messageBean;
+    }
+
+    public SessionMap<String, Object> getSessionMap() {
+        return sessionMap;
+    }
+
+    public void setSessionMap(SessionMap<String, Object> sessionMap) {
+        this.sessionMap = sessionMap;
+    }
+
+    @Override
+    public void setSession(Map<String, Object> map) {
+        sessionMap = (SessionMap) map;
     }
 
 }

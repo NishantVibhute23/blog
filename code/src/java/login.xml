@@ -1,20 +1,31 @@
-<?xml version="1.0" encoding="UTF-8"?> 
+<?xml version="1.0" encoding="UTF-8"?>
 
 
-<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd"> <struts> 
-    <package name="logins"  extends="struts-default"> 
-        <action name="login" class = "com.madhurisadgir.redirect.Login" > 
-            <result name = "success"> login.jsp </result> 
-        </action> 
-        
-        <action name="signup" class = "com.madhurisadgir.redirect.Login" method = "signUp"> 
-            <result name = "success"> signup.jsp </result> 
-        </action> 
-        
-        <action name="createUser" class = "com.madhurisadgir.redirect.Login" method = "createUser"> 
-            <result name = "success"> login.jsp </result> 
-            <result name = "error"> signup.jsp </result> 
-        </action> 
-    </package> 
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd"> <struts>
+    <package name="logins"  extends="struts-default">
+        <action name="login" class = "com.madhurisadgir.redirect.Login" >
+            <result name = "success"> login.jsp </result>
+        </action>
+
+        <action name="signup" class = "com.madhurisadgir.redirect.Login" method = "signUp">
+            <result name = "success"> signup.jsp </result>
+        </action>
+
+        <action name="createUser" class = "com.madhurisadgir.redirect.Login" method = "createUser">
+            <result name = "success"> login.jsp </result>
+            <result name = "error"> signup.jsp </result>
+        </action>
+        <action name="loginUser" class = "com.madhurisadgir.redirect.Login" method = "loginUser">
+            <result name = "success"> home.jsp </result>
+            <result name = "error"> login.jsp </result>
+        </action>
+
+        <action name="logoutUser" class = "com.madhurisadgir.redirect.Login" method = "logoutUser">
+            <result name = "success"> login.jsp </result>
+        </action>
+        <action name="forgotUserPass" class = "com.madhurisadgir.redirect.Login" method = "forgotUserPass">
+            <result name = "success"> forgot.jsp </result>
+        </action>
+    </package>
 </struts>
 
