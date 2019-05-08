@@ -38,18 +38,18 @@
                                                         </ul>
                                                       </li>					          					          		          -->
                     <li><a href="contactme">Contact</a></li>
-                        <s:if test="#session.login == true">
-                        <li> <div class="dropdown">
-                                <button class="dropbtn"><s:property value="#session.userBean.userName"/>
-                                    <i class="fa fa-caret-down"></i>
-                                </button>
-                                <div class="dropdown-content">
-                                    <a href="#">Link 1</a>
-                                    <a href="#">Link 2</a>
-                                    <a href="<s:url action="logoutUser"/>">Logout</a>
-                                </div>
-                            </div>
-                        </li>
+                    
+                        <s:if test="#session.login">
+                           <li class="menu-has-children"><a href=""><s:property value="#session.userBean.userName"/></a>
+			            <ul>
+			              <li><a href="">My Profile</a></li>
+                                      <li><hr/></li>
+			              <li><a href="<s:url action="logoutUser"/>">Logout</a></li>
+			            </ul>
+			          </li>	 
+                            
+                            
+                       
                     </s:if>
                     <s:else>
                         <li><a href="login">Login</a></li>

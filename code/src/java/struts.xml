@@ -11,6 +11,17 @@
     <include file="InstaPay.xml"/>
 
     <package name="default" extends="struts-default">
+        
+        <result-types>
+			<result-type name="imageResult"
+				class="com.madhurisadgir.redirect.CustomImageBytesResult" />
+	</result-types>
+        
+        <action name="ImageAction" class="com.madhurisadgir.redirect.ImageAction">
+			<result name="success" type="imageResult">
+			</result>
+		</action>
+        
         <action name="services" class="com.madhurisadgir.redirect.Services" >
             <result name="success">services.jsp</result>
         </action>
@@ -41,6 +52,22 @@
         <action name="subscription" class="com.madhurisadgir.redirect.Subscription" method="execute">
             <result name="success">services.jsp</result>
         </action>
+
+
+
+ <action name="uploadImage" class="com.madhurisadgir.redirect.FileUploadAction" >
+            <interceptor-ref name="fileUpload">  
+                <param name="maximumSize">2097152</param>  
+  
+                <param name="allowedTypes">  
+                    image/png,image/gif,image/jpeg,image/pjpeg  
+                                </param>  
+            </interceptor-ref>  
+            <interceptor-ref name="defaultStack"></interceptor-ref>  
+            <result name="success" type="chain">home</result>  
+          
+        </action>
+
 
     </package>
 </struts>

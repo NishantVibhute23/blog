@@ -18,7 +18,7 @@ public class DBUtil {
 
         try {
             String DATABASE_URLIntraday = "jdbc:mysql://" + CommonUtil.getResourceProperty("database.url") + "/" + CommonUtil.getResourceProperty("database.name");
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection(DATABASE_URLIntraday, CommonUtil.getResourceProperty("database.username"), CommonUtil.getResourceProperty("database.password"));
             return con;
 

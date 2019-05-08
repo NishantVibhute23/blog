@@ -13,11 +13,10 @@ import com.madhurisadgir.util.EmailUtil;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.File;
 import java.io.IOException;
+import static java.lang.Boolean.TRUE;
 import java.text.MessageFormat;
 import java.util.Map;
 import java.util.MissingResourceException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -71,7 +70,7 @@ public class Login extends ActionSupport implements SessionAware, ServletRequest
         UserBean userBean1 = loginDao.loginUser(userBean);
         String returntype = ActionSupport.ERROR;
         if (userBean1.getUserName() != null) {
-            sessionMap.put("login", "true");
+            sessionMap.put("login", TRUE);
             sessionMap.put("userBean", userBean1);
             returntype = ActionSupport.SUCCESS;
         } else {

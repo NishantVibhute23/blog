@@ -16,7 +16,7 @@
             <result name = "error"> signup.jsp </result>
         </action>
         <action name="loginUser" class = "com.madhurisadgir.redirect.Login" method = "loginUser">
-            <result name = "success"> home.jsp </result>
+            <result name = "success" type="chain"> home</result>
             <result name = "error"> login.jsp </result>
         </action>
 

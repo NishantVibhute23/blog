@@ -49,10 +49,10 @@ public class LoginDao {
         UserBean userBean = new UserBean();
         try {
             con = db.getConnection();
-            PreparedStatement ps = con.prepareStatement("call loginUser(?,?,?)");
+            PreparedStatement ps = con.prepareStatement("call loginUser(?,?)");
             ps.setString(1, user.getUseremailId());
             ps.setString(2, user.getUserpassword());
-            ps.setInt(3, UserType.USER.getId());
+//            ps.setInt(3, UserType.USER.getId());
 
             ResultSet rs = ps.executeQuery();
 
@@ -60,6 +60,7 @@ public class LoginDao {
                 userBean.setUserId(rs.getInt(1));
                 userBean.setUserName(rs.getString(2));
                 userBean.setUseremailId(rs.getString(3));
+                userBean.setUserType(rs.getInt(4));
 
             }
 

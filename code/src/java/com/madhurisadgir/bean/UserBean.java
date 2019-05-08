@@ -16,6 +16,7 @@ public class UserBean {
     String userpassword;
     String useremailId;
     String userRepeatPassword;
+    int userType;
 
     public int getUserId() {
         return userId;
@@ -55,6 +56,14 @@ public class UserBean {
 
     public void setUserRepeatPassword(String userRepeatPassword) {
         this.userRepeatPassword = userRepeatPassword;
+    }
+
+    public int getUserType() {
+        return userType;
+    }
+
+    public void setUserType(int userType) {
+        this.userType = userType;
     }
 
 }
