@@ -5,38 +5,42 @@
 <struts>
     <!-- Configuration for the default package. -->
     <constant name="struts.ui.theme" value="simple" />
-    
+
     <include file="login.xml"/>
-     <include file="contact.xml"/>
-    
+    <include file="contact.xml"/>
+    <include file="InstaPay.xml"/>
+
     <package name="default" extends="struts-default">
-       <action name="services" class="com.madhurisadgir.redirect.Services" >
+        <action name="services" class="com.madhurisadgir.redirect.Services" >
             <result name="success">services.jsp</result>
         </action>
-        
-          <action name="home" class="com.madhurisadgir.redirect.Home" >
+
+        <action name="home" class="com.madhurisadgir.redirect.Home" >
             <result name="success">home.jsp</result>
         </action>
-        
-          <action name="about" class="com.madhurisadgir.redirect.About" >
+
+        <action name="about" class="com.madhurisadgir.redirect.About" >
             <result name="success">about.jsp</result>
         </action>
-        
+
         <action name="portfolio" class="com.madhurisadgir.redirect.Portfolio" >
             <result name="success">portfolio.jsp</result>
         </action>
-        
+
         <action name="netsettest" class="com.madhurisadgir.redirect.Services" method="netSetExam" >
             <result name="success">pages/service/netsetdetail.jsp</result>
-        </action> 
-        
+        </action>
+
         <action name="starttest" class="com.madhurisadgir.redirect.Services" method="startTest" >
             <result name="success">pages/service/online_net_set_test.jsp</result>
-        </action> 
-        
-         <action name="submitTest" class="com.madhurisadgir.redirect.Services" method="submitTest" >
+        </action>
+
+        <action name="submitTest" class="com.madhurisadgir.redirect.Services" method="submitTest" >
             <result name="success">pages/service/online_net_set_test.jsp</result>
-        </action> 
-        
+        </action>
+        <action name="subscription" class="com.madhurisadgir.redirect.Subscription" method="execute">
+            <result name="success">services.jsp</result>
+        </action>
+
     </package>
 </struts>

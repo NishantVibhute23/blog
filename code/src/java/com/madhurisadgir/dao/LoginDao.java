@@ -75,7 +75,7 @@ public class LoginDao {
         UserBean userBean = new UserBean();
         try {
             con = db.getConnection();
-            PreparedStatement ps = con.prepareStatement("call userExist(?,?)");
+            PreparedStatement ps = con.prepareStatement("call isUserExist(?,?)");
             ps.setString(1, emailId);
             ps.setInt(2, UserType.USER.getId());
 

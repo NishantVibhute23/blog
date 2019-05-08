@@ -19,7 +19,7 @@
                     <li><a href="about">About</a></li>
                     <li><a href="services">Services</a></li>
                     <li><a href="portfolio">Portfolio</a></li>
-                    <li><a href="price.html">Pricing</a></li>
+                    <li><a href="<s:url action="subscription"/>">Pricing</a></li>
                     <!--			          <li class="menu-has-children"><a href="">Blog</a>
                                                         <ul>
                                                           <li><a href="blog-home.html">Blog Home</a></li>
