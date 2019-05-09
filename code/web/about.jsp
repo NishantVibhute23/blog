@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@taglib prefix="s" uri="/struts-tags" %>
 <html lang="zxx" class="no-js">
     <head>
         <!-- Mobile Specific Meta -->
@@ -15,7 +16,7 @@
         <meta charset="UTF-8">
         <!-- Site Title -->
         <title>Personal</title>
-
+<script src="visitors/js/vendor/jquery-2.2.4.min.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet"> 
         <!--
         CSS
@@ -29,6 +30,60 @@
         <link rel="stylesheet" href="visitors/css/animate.min.css">
         <link rel="stylesheet" href="visitors/css/owl.carousel.css">					
         <link rel="stylesheet" href="visitors/css/main.css">
+        
+        <style>
+            .buttonP {
+                position: absolute;
+                left:0;
+                top: 0px;
+                text-align: center;
+                opacity: 0;
+            }
+
+            .buttonP a {
+                width: 200px;
+                padding: 12px 48px;
+                text-align: center;
+                color: white;
+                font-weight: bold;
+                background-color: #ff0040;
+                z-index: 1;
+            }
+            .containerP:hover .buttonP {
+                opacity: 1;
+            }
+
+            .glyphicon {
+                font-size: 20px;
+            }
+
+            
+           
+
+    
+
+        </style>
+        
+        <script>
+            $(document).on("click", ".open-uploadDialog", function () {
+                var uploadId = $(this).data('id');
+                $(".modal-body #uploadId").val(uploadId);
+                // As pointed out in comments,
+                // it is unnecessary to have to manually call the modal.
+                // $('#addBookDialog').modal('show');
+            });
+            $(document).on("click", ".open-uploadDialog-textArea", function () {
+                var uploadId = $(this).data('id');
+                
+                $(".modal-body-desc #uploadId").val(uploadId);
+                
+                
+                // As pointed out in comments,
+                // it is unnecessary to have to manually call the modal.
+                // $('#addBookDialog').modal('show');
+            });
+        </script>
+        
     </head>
     <body>	
         <jsp:include page="/header.jsp" />
@@ -52,64 +107,44 @@
         <section class="home-about-area section-gap">
             <div class="container">
                 <div class="row align-items-center justify-content-between">
-                    <div class="col-lg-6 col-md-6 home-about-left">
-                        <img class="img-fluid" src="visitors/img/about-img.png" alt="">
+                    <div class="col-lg-6 col-md-6 home-about-left containerP">
+                        <img class="img-fluid" src="<s:url action='ImageAction'><s:param name="imageId"><s:property value="personalDetail.image"/></s:param></s:url>" alt="">
+                        <s:if test="#session.login">
+                            <s:if test="#session.userBean.userType == 1">
+                                <div class="buttonP">
+                                    <a href="#" data-id="2" class="open-uploadDialog" data-toggle="modal" data-target="#myModal"> CHANGE PHOTO </a>
+                                </div>
+                            </s:if>
+                        </s:if>
                     </div>
                     <div class="col-lg-5 col-md-6 home-about-right">
                         <h6>About Me</h6>
-                        <h1 class="text-uppercase">Personal Details</h1>
+                        <h1 class="text-uppercase" >Personal Details
+                        <s:if test="#session.login">
+                                <s:if test="#session.userBean.userType == 1">
+                                    <a   href="#" data-id="2" class="open-uploadDialog-textArea" data-toggle="modal" data-target="#myModalDesc">
+                                        
+                                        <i title="EDIT" class="fa fa-pencil" style="color: red" aria-hidden="true"></i>
+                                    </a>
+                                </s:if>
+                            </s:if>
+                        </h1>
                         <p>
-                            Here, I focus on a range of items and features that we use in life without giving them a second thought. such as Coca Cola. Dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
+                            <s:property value="personalDetail.desc1"/>
                         </p>
-                        <a href="#" class="primary-btn text-uppercase">View Full Details</a>
+                        
                     </div>
                     <div class="col-lg-12 pt-60">
-                        <p>
-                            It won?t be a bigger problem to find one video game lover in your neighbor. Since the introduction of Virtual Game, it has been achieving great heights so far as its popularity and technological advancement are concerned. The history of video game is as interesting as a fairy tale. 
+                        <s:iterator value="desc2List" status="statusVar">
+  <p>
+                             <s:property />
                         </p>
-                        <p>
-                            The quality of today?s video game was not at all there when video game first conceptualized and played ever. During the formulative years, video games were created by using various interactive electronic devices with various display formats. The first ever video game was designed in 1947 by Thomas T. Goldsmith Jr. 								
-                        </p>
-                        <h4 class="pt-30">Tools Expertness</h4>	
+</s:iterator>
+                        
+                        
                     </div>
                 </div>
-                <div class="row skillbar-wraps">					
-                    <div class="col-lg-6 skill-left">
-                        <div class="single-skill">
-                            <p>
-                                After Effects 85%
-                            </p>
-                            <div class="skill" data-width="85"></div>
-                        </div>
-                        <div class="single-skill">
-                            <p>
-                                Photoshop 90%
-                            </p>
-                            <div class="skill" data-width="90"></div>
-                        </div>
-                        <div class="single-skill">
-                            <p>
-                                Illustrator 70%
-                            </p>
-                            <div class="skill" data-width="70"></div>
-                        </div>																				
-                    </div>
-                    <div class="col-lg-6 skill-right">
-                        <div class="single-skill">
-                            <p>
-                                Sublime 95%
-                            </p>
-                            <div class="skill" data-width="95"></div>
-                        </div>								
-                        <div class="single-skill">
-                            <p>
-                                Sketch 85%
-                            </p>
-                            <div class="skill" data-width="85"></div>
-                        </div>
-
-                    </div>
-                </div>
+                
             </div>	
         </section>
         <!-- End home-about Area -->	
@@ -119,8 +154,18 @@
             <div class="text-center">
                 <div class="menu-content pb-70">
                     <div class="title text-center">
-                        <h1 class="mb-10">My Qualifications</h1>
-                        <p>Who are in extremely love with eco friendly system.</p>
+                        <h1 class="mb-10">My Qualifications
+                        <s:if test="#session.login">
+                                <s:if test="#session.userBean.userType == 1">
+                                    <a   href="#" data-id="2" class="open-uploadDialog-textArea" data-toggle="modal" data-target="#myModalDesc">
+                                        
+                                        <i title="EDIT" class="fa fa-pencil" style="color: red" aria-hidden="true"></i>
+                                    </a>
+                                </s:if>
+                            </s:if>
+                        
+                        </h1>
+                       
                     </div>
                 </div>
             </div>				
@@ -219,6 +264,81 @@
         </section>
         <!-- End testimonial Area -->			
 
+        <div class="modal" id="myModal">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Upload Photo</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <s:form action="uploadImage" method="post" enctype="multipart/form-data">
+                            <s:hidden name="uploadId" id="uploadId"/>
+                            <s:file name="userImage" label="Image" />
+                                                       
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer" style="justify-content: center !important">
+                            <s:submit  cssClass="btn btn-primary" value="Upload" align="center" />
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        </div>
+ </s:form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="modal" id="myModalDesc">
+            <div class="modal-dialog  modal-lg">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+
+                        
+                        <div class="personalDetailDiv">
+                            <h4 class="modal-title">Personal Detail</h4>
+                        </div>
+
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body-desc">
+                        <div class="container">
+                            <br/>
+                            <s:form action="updateDescFromAboutPage" method="post">
+                                <s:hidden name="uploadId" id="uploadId"/>
+                                 
+                                <div class="personalDetailDiv">
+                                    <div class="form-group">
+                                        <label for="email">Short Description:</label>
+                                        <s:textarea name="personalDetail.desc1" cssClass="form-control" rows="5"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Detail Description:</label>
+                                        <s:textarea name="personalDetail.desc2" cssClass="form-control" rows="10"  />
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer" style="justify-content: center !important">
+                            <s:submit  cssClass="btn btn-primary" value="Save" align="center" />
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        </div>
+
+                    </s:form>
+                </div>
+            </div>
+        </div>
         <!-- Start brands Area -->
         <section class="brands-area">
             <div class="container">

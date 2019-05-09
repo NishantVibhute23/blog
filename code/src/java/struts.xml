@@ -60,8 +60,12 @@
             <result name="success" type="chain">home</result>
 
         </action>
-        <action name="updateDesc" class="com.madhurisadgir.redirect.FileUploadAction" method="updateDesc">
-            <result name="success">home</result>
+        <action name="updateDesc" class="com.madhurisadgir.redirect.Home" method="updateDesc">
+            <result name="success" type="chain">home</result>
+        </action>
+        
+        <action name="updateDescFromAboutPage" class="com.madhurisadgir.redirect.About" method="updateDescFromAboutPage">
+            <result name="success" type="chain">about</result>
         </action>
 
     </package>

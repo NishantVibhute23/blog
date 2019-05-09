@@ -19,6 +19,7 @@ public class Home extends ActionSupport {
     PageDetail home = new PageDetail();
     PageDetail personalDetail = new PageDetail();
     CommonDao commonDao = new CommonDao();
+    private int uploadId;
 
     public String execute() {
 
@@ -29,6 +30,16 @@ public class Home extends ActionSupport {
 //        personalDetail.setImage(CommonUtil.getResourceProperty("photos.path") + "personalDetails\\about-img.png");
 
         return ActionSupport.SUCCESS;
+    }
+
+    public String updateDesc() {
+        if (uploadId == PageEnum.Home.getId()) {
+            commonDao.pageDetailDesc(uploadId, home.getDesc1(), "");
+        } else {
+            commonDao.pageDetailDesc(uploadId, personalDetail.getDesc1(), personalDetail.getDesc2());
+        }
+
+        return SUCCESS;
     }
 
     public PageDetail getHome() {
@@ -45,6 +56,14 @@ public class Home extends ActionSupport {
 
     public void setPersonalDetail(PageDetail personalDetail) {
         this.personalDetail = personalDetail;
+    }
+
+    public int getUploadId() {
+        return uploadId;
+    }
+
+    public void setUploadId(int uploadId) {
+        this.uploadId = uploadId;
     }
 
 }

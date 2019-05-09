@@ -74,6 +74,15 @@
             $(document).on("click", ".open-uploadDialog-textArea", function () {
                 var uploadId = $(this).data('id');
                 $(".modal-body-desc #uploadId").val(uploadId);
+                
+                if (uploadId === 1){
+                    $(".homeDiv").show();
+                    $(".personalDetailDiv").hide();
+                }else{
+                    $(".homeDiv").hide();
+                    $(".personalDetailDiv").show();
+                }
+
                 // As pointed out in comments,
                 // it is unnecessary to have to manually call the modal.
                 // $('#addBookDialog').modal('show');
@@ -97,8 +106,8 @@
 
                             <s:if test="#session.login">
                                 <s:if test="#session.userBean.userType == 1">
-                                    <a href="#" data-id="2" class="open-uploadDialog-textArea" data-toggle="modal" data-target="#myModalDesc">
-                                        <span class="glyphicon glyphicon-pencil" style="color: #ff0040;" title="Edit"></span>
+                                    <a href="#" data-id="1" class="open-uploadDialog-textArea" data-toggle="modal" data-target="#myModalDesc">
+                                        <i title="EDIT" class="fa fa-pencil  fa-lg" style="color: red" aria-hidden="true"></i>
                                     </a>
                                 </s:if>
                             </s:if>
@@ -143,7 +152,7 @@
                             <s:if test="#session.login">
                                 <s:if test="#session.userBean.userType == 1">
                                     <a href="#" data-id="2" class="open-uploadDialog-textArea" data-toggle="modal" data-target="#myModalDesc">
-                                        <span class="glyphicon glyphicon-pencil" style="color: #ff0040;" title="Edit"></span>
+                                         <i title="EDIT" class="fa fa-pencil  fa-lg" style="color: red" aria-hidden="true"></i>
                                     </a>
                                 </s:if>
                             </s:if>
@@ -539,7 +548,7 @@
         <!-- end recent-blog Area -->
 
         <div class="modal" id="myModal">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
 
                     <!-- Modal Header -->
@@ -553,50 +562,71 @@
                         <s:form action="uploadImage" method="post" enctype="multipart/form-data">
                             <s:hidden name="uploadId" id="uploadId"/>
                             <s:file name="userImage" label="Image" />
-                            <s:submit value="Upload" align="center" />
-                        </s:form>
+                                                  
                     </div>
 
                     <!-- Modal footer -->
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    </div>
-
+                    <div class="modal-footer" style="justify-content: center !important">
+                            <s:submit  cssClass="btn btn-primary" value="Upload" align="center" />
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        </div>
+ </s:form>
                 </div>
             </div>
         </div>
 
-        <div class="modal" id="myModal">
-            <div class="modal-dialog">
+        <div class="modal" id="myModalDesc">
+            <div class="modal-dialog  modal-lg">
                 <div class="modal-content">
 
                     <!-- Modal Header -->
                     <div class="modal-header">
-                        <h4 class="modal-title">Edit Desc</h4>
+
+                        <div class="homeDiv">
+                            <h4 class="modal-title">About Me</h4>
+                        </div>
+                        <div class="personalDetailDiv">
+                            <h4 class="modal-title">Personal Detail</h4>
+                        </div>
+
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
 
                     <!-- Modal body -->
                     <div class="modal-body-desc">
-                        <s:form action="updateDesc" method="post">
-                            <s:hidden name="uploadId" id="uploadId"/>
-                            <s:if test="uploadId==1">
-                                <s:textarea name="desc" label="Enter Description" />
-                            </s:if>
-                            <s:else>
-                                <s:textarea name="desc1" label="Enter Description" />
-                                <s:textarea name="desc2" label="Enter Description" />
-                            </s:else>
+                        <div class="container">
+                            <br/>
+                            <s:form action="updateDesc" method="post">
+                                <s:hidden name="uploadId" id="uploadId"/>
 
-                            <s:submit value="Save" align="center" />
-                        </s:form>
-                    </div>
+                                 <div class="homeDiv">
+                                    <div class="form-group">
+                                        <label for="email">Short Description:</label>
+                                        <s:textarea name="home.desc1" cssClass="form-control" rows="5"/>
+                                    </div>
+                                </div>
+                                <div class="personalDetailDiv">
+                                    <div class="form-group">
+                                        <label for="email">Short Description:</label>
+                                        <s:textarea name="personalDetail.desc1" cssClass="form-control" rows="5"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Detail Description:</label>
+                                        <s:textarea name="personalDetail.desc2" cssClass="form-control" rows="10"  />
+                                    </div>
+                                </div>
 
-                    <!-- Modal footer -->
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    </div>
+                            </div>
 
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer" style="justify-content: center !important">
+                            <s:submit  cssClass="btn btn-primary" value="Save" align="center" />
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        </div>
+
+                    </s:form>
                 </div>
             </div>
         </div>
