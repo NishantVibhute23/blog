@@ -17,7 +17,7 @@
         <!-- Site Title -->
         <title>Personal</title>
 <script src="visitors/js/vendor/jquery-2.2.4.min.js"></script>
-        <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet"> 
+        <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
         <!--
         CSS
         ============================================= -->
@@ -25,10 +25,10 @@
         <link rel="stylesheet" href="visitors/css/font-awesome.min.css">
         <link rel="stylesheet" href="visitors/css/bootstrap.css">
         <link rel="stylesheet" href="visitors/css/magnific-popup.css">
-        <link rel="stylesheet" href="visitors/css/jquery-ui.css">				
-        <link rel="stylesheet" href="visitors/css/nice-select.css">							
+        <link rel="stylesheet" href="visitors/css/jquery-ui.css">
+        <link rel="stylesheet" href="visitors/css/nice-select.css">
         <link rel="stylesheet" href="visitors/css/animate.min.css">
-        <link rel="stylesheet" href="visitors/css/owl.carousel.css">					
+        <link rel="stylesheet" href="visitors/css/owl.carousel.css">
         <link rel="stylesheet" href="visitors/css/main.css">
         
         <style>
@@ -85,23 +85,23 @@
         </script>
         
     </head>
-    <body>	
+    <body>
         <jsp:include page="/header.jsp" />
 
         <!-- start banner Area -->
         <section class="about-banner">
-            <div class="container">				
+            <div class="container">
                 <div class="row d-flex align-items-center justify-content-center">
                     <div class="about-content col-lg-12">
                         <h1 class="text-white">
-                            About Me				
-                        </h1>	
+                            About Me
+                        </h1>
                         <p class="text-white link-nav"><a href="index.html">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="about.html"> About Me</a></p>
-                    </div>	
+                    </div>
                 </div>
             </div>
         </section>
-        <!-- End banner Area -->	
+        <!-- End banner Area -->
 
         <!-- Start home-about Area -->
         <section class="home-about-area section-gap">
@@ -145,9 +145,9 @@
                     </div>
                 </div>
                 
-            </div>	
+            </div>
         </section>
-        <!-- End home-about Area -->	
+        <!-- End home-about Area -->
 
         <!-- Start timeline Area -->
         <section class="timeline pb-120">
@@ -168,55 +168,25 @@
                        
                     </div>
                 </div>
-            </div>				
+            </div>
             <ul>
-                <li>
-                    <div class="content">
-                        <h4>
-                            <time>Masters in Graphics & Fine Arts</time>
-                        </h4>
-                        <p><b>Session:</b> 2010-11</p>
-                        <p><b>Result:</b> 3.78 (In the Scale of 4.00)</p>
-                    </div>
-                </li>
-                <li>
-                    <div class="content">
-                        <img class="img-fluid mx-auto d-block mb-30" src="visitors/img/about/c-logo.png" alt="">
-                        <h4>
-                            <time>Creative Content Developer</time>
-                        </h4>
-                        <p>July 2015 to Present</p>
-                    </div>
-                </li>
-                <li>
-                    <div class="content">
-                        <h4>
-                            <time>Bachelor in Graphics & UI/UX</time>
-                        </h4>
-                        <p><b>Session:</b> 2006-09</p>
-                        <p><b>Result:</b> 3.40 (In the Scale of 4.00)</p>
-                    </div>
-                </li>
-                <li>
-                    <div class="content">
-                        <img class="img-fluid mx-auto d-block mb-30" src="visitors/img/about/c-logo.png" alt="">
-                        <h4>
-                            <time>Senior UI/UX Designer</time>
-                        </h4>
-                        <p>July 2015 to Present</p>
-                    </div>
-                </li>
-                <li>
-                    <div class="content">
-                        <h4>
-                            <time>Diploma in Fine Arts & Printing</time>
-                        </h4>
-                        <p><b>Session:</b> 2003-06</p>
-                        <p><b>Result:</b> 4.94 (In the Scale of 5.00)</p>
-                    </div>
-                </li>
+                <s:set var="counter" value="0"/>
+                <s:iterator value="qualList">
+                    <li>
+                        <div class="content">
+                            <s:if test="#counter%2!=0 ">
+                                <img class="img-fluid mx-auto d-block mb-30" src="visitors/img/about/c-logo.png" alt="">
+                            </s:if>
+                            <h4>
+                                <time><s:property value="courseName"/></time>
+                            </h4>
+                            <p><b>Session:</b> <s:property value="year"/></p>
+                        </div>
+                    </li>
+                    <s:set var="counter" value="%{#counter+1}"/>
+                </s:iterator>
             </ul>
-        </section>		
+        </section>
 
         <!-- End timeline Area -->
 
@@ -240,7 +210,7 @@
                             </div>
                             <div class="desc">
                                 <p>
-                                    Do you want to be even more successful? Learn to love learning and growth. The more effort you put into improving your skills, the bigger the payoff you.		     
+                                    Do you want to be even more successful? Learn to love learning and growth. The more effort you put into improving your skills, the bigger the payoff you.
                                 </p>
                                 <h4>Harriet Maxwell</h4>
                                 <p>CEO at Google</p>
@@ -262,7 +232,7 @@
                 </div>
             </div>
         </section>
-        <!-- End testimonial Area -->			
+        <!-- End testimonial Area -->
 
         <div class="modal" id="myModal">
             <div class="modal-dialog modal-lg">
@@ -363,7 +333,39 @@
                 </div>
             </div>
         </section>
-        <!-- End brands Area -->	
+        <!-- End brands Area -->
+
+        <div class="modal" id="myModalQual">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Update Qualification</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <s:form action="updateQualification" method="post">
+                            <s:iterator value="qualList">
+                                <s:hidden name="courseId"/>
+                                <s:textfield name="courseName"/>
+                                <s:textfield name="courseDesc"/>
+                                <s:textfield name="year"/>
+                            </s:iterator>
+                            <s:submit value="Upload" align="center" />
+                        </s:form>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
 
         <!-- start footer Area -->
         <jsp:include page="/footer.jsp" />

@@ -8,9 +8,13 @@ package com.madhurisadgir.redirect;
 import com.madhurisadgir.bean.PageDetail;
 import com.madhurisadgir.dao.CommonDao;
 import com.madhurisadgir.enums.PageEnum;
+import com.madhurisadgir.bean.Qualification;
+import com.madhurisadgir.dao.CommonDao;
 import com.opensymphony.xwork2.ActionSupport;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,12 +30,23 @@ public class About extends ActionSupport {
 
     public About() {
     }
+    CommonDao commonDao = new CommonDao();
+    List<Qualification> qualList = new ArrayList<>();
 
     @Override
     public String execute() {
         personalDetail = commonDao.getPageDetail(PageEnum.PersonalDetails.getId());
         String[] lines = personalDetail.getDesc2().split("\\r?\\n");
         desc2List = Arrays.asList(lines);
+        qualList = commonDao.qualificationDetails();
+        return ActionSupport.SUCCESS;
+    }
+
+    public String updateQualification() {
+        int count = commonDao.updateQualification(qualList);
+        if (count > 0) {
+            qualList = commonDao.qualificationDetails();
+        }
         return ActionSupport.SUCCESS;
     }
 
