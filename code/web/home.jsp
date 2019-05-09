@@ -17,7 +17,7 @@
         <!-- Site Title -->
         <title>Personal</title>
         <script src="visitors/js/vendor/jquery-2.2.4.min.js"></script>
-        <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet"> 
+        <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
         <!--
         CSS
         ============================================= -->
@@ -25,10 +25,10 @@
         <link rel="stylesheet" href="visitors/css/font-awesome.min.css">
         <link rel="stylesheet" href="visitors/css/bootstrap.css">
         <link rel="stylesheet" href="visitors/css/magnific-popup.css">
-        <link rel="stylesheet" href="visitors/css/jquery-ui.css">				
-        <link rel="stylesheet" href="visitors/css/nice-select.css">							
+        <link rel="stylesheet" href="visitors/css/jquery-ui.css">
+        <link rel="stylesheet" href="visitors/css/nice-select.css">
         <link rel="stylesheet" href="visitors/css/animate.min.css">
-        <link rel="stylesheet" href="visitors/css/owl.carousel.css">				
+        <link rel="stylesheet" href="visitors/css/owl.carousel.css">
         <link rel="stylesheet" href="visitors/css/main.css">
 
         <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">-->
@@ -67,13 +67,20 @@
             $(document).on("click", ".open-uploadDialog", function () {
                 var uploadId = $(this).data('id');
                 $(".modal-body #uploadId").val(uploadId);
-                // As pointed out in comments, 
+                // As pointed out in comments,
+                // it is unnecessary to have to manually call the modal.
+                // $('#addBookDialog').modal('show');
+            });
+            $(document).on("click", ".open-uploadDialog-textArea", function () {
+                var uploadId = $(this).data('id');
+                $(".modal-body-desc #uploadId").val(uploadId);
+                // As pointed out in comments,
                 // it is unnecessary to have to manually call the modal.
                 // $('#addBookDialog').modal('show');
             });
         </script>
     </head>
-    <body>	
+    <body>
 
         <jsp:include page="/header.jsp" />
         <!-- start banner Area -->
@@ -90,20 +97,16 @@
 
                             <s:if test="#session.login">
                                 <s:if test="#session.userBean.userType == 1">
-                                    <span class="glyphicon glyphicon-pencil" style="color: #ff0040;" title="Edit"></span>
+                                    <a href="#" data-id="2" class="open-uploadDialog-textArea" data-toggle="modal" data-target="#myModalDesc">
+                                        <span class="glyphicon glyphicon-pencil" style="color: #ff0040;" title="Edit"></span>
+                                    </a>
                                 </s:if>
                             </s:if>
-
                         </p>
-
                         <a href="#" class="primary-btn text-uppercase">discover now</a>
-
                     </div>
                     <div class="col-lg-6 col-md-6 banner-right d-flex align-self-end containerP">
-
-
                         <img class="img-fluid" src="<s:url action='ImageAction'><s:param name="imageId"><s:property value="home.image"/></s:param></s:url>" alt="" />
-
                         <s:if test="#session.login">
                             <s:if test="#session.userBean.userType == 1">
                                 <div class="buttonP"><a href="#" class="open-uploadDialog" data-id="1" data-toggle="modal" data-target="#myModal"> CHANGE PHOTO </a></div>
@@ -114,7 +117,7 @@
                         <!--<img class="img-fluid" src="visitors/img/hero-img.png" alt="">-->
                     </div>
                 </div>
-            </div>					
+            </div>
         </section>
         <!-- End banner Area -->
 
@@ -126,7 +129,9 @@
                         <img class="img-fluid" src="<s:url action='ImageAction'><s:param name="imageId"><s:property value="personalDetail.image"/></s:param></s:url>" alt="">
                         <s:if test="#session.login">
                             <s:if test="#session.userBean.userType == 1">
-                                <div class="buttonP"><a href="#" data-id="2" class="open-uploadDialog" data-toggle="modal" data-target="#myModal"> CHANGE PHOTO </a></div>
+                                <div class="buttonP">
+                                    <a href="#" data-id="2" class="open-uploadDialog" data-toggle="modal" data-target="#myModal"> CHANGE PHOTO </a>
+                                </div>
                             </s:if>
                         </s:if>
                     </div>
@@ -137,24 +142,26 @@
                             <s:property value="personalDetail.desc1"/>
                             <s:if test="#session.login">
                                 <s:if test="#session.userBean.userType == 1">
-                                    <span class="glyphicon glyphicon-pencil" style="color: #ff0040;" title="Edit"></span>
+                                    <a href="#" data-id="2" class="open-uploadDialog-textArea" data-toggle="modal" data-target="#myModalDesc">
+                                        <span class="glyphicon glyphicon-pencil" style="color: #ff0040;" title="Edit"></span>
+                                    </a>
                                 </s:if>
                             </s:if>
                         </p>
                         <a href="#" class="primary-btn text-uppercase">View Full Details</a>
                     </div>
                 </div>
-            </div>	
+            </div>
         </section>
         <!-- End home-about Area -->
 
         <!-- Start services Area -->
         <jsp:include page="/myofferedserviceslist.jsp" />
-        <!-- End services Area -->	
+        <!-- End services Area -->
 
         <!-- Start fact Area -->
         <section class="facts-area section-gap" id="facts-area">
-            <div class="container">				
+            <div class="container">
                 <div class="row">
                     <div class="col-lg-3 col-md-6 single-fact">
                         <h1 class="counter">2536</h1>
@@ -167,15 +174,15 @@
                     <div class="col-lg-3 col-md-6 single-fact">
                         <h1 class="counter">2239</h1>
                         <p>Cups of Coffee</p>
-                    </div>	
+                    </div>
                     <div class="col-lg-3 col-md-6 single-fact">
                         <h1 class="counter">435</h1>
                         <p>Real Professionals</p>
-                    </div>												
+                    </div>
                 </div>
-            </div>	
+            </div>
         </section>
-        <!-- end fact Area -->	
+        <!-- end fact Area -->
 
         <!-- Start portfolio-area Area -->
         <section class="portfolio-area section-gap" id="portfolio">
@@ -207,16 +214,16 @@
                                     <div class="overlay overlay-bg"></div>
                                     <img class="image img-fluid" src="visitors/img/p1.jpg" alt="">
                                 </div>
-                                <a href="visitors/img/p1.jpg" class="img-pop-up">	
+                                <a href="visitors/img/p1.jpg" class="img-pop-up">
                                     <div class="middle">
                                         <div class="text align-self-center d-flex"><img src="visitors/img/preview.png" alt=""></div>
                                     </div>
-                                </a>                              		
+                                </a>
                             </div>
                             <div class="p-inner">
                                 <h4>2D Vinyl Design</h4>
                                 <div class="cat">vector</div>
-                            </div>					                               
+                            </div>
                         </div>
                         <div class="single-portfolio col-sm-4 all raster">
                             <div class="relative">
@@ -224,28 +231,28 @@
                                     <div class="overlay overlay-bg"></div>
                                     <img class="image img-fluid" src="visitors/img/p2.jpg" alt="">
                                 </div>
-                                <a href="visitors/img/p2.jpg" class="img-pop-up">	
+                                <a href="visitors/img/p2.jpg" class="img-pop-up">
                                     <div class="middle">
                                         <div class="text align-self-center d-flex"><img src="visitors/img/preview.png" alt=""></div>
                                     </div>
-                                </a>                              		
+                                </a>
                             </div>
                             <div class="p-inner">
                                 <h4>2D Vinyl Design</h4>
                                 <div class="cat">vector</div>
-                            </div>					                               
-                        </div>                            
+                            </div>
+                        </div>
                         <div class="single-portfolio col-sm-4 all ui">
                             <div class="relative">
                                 <div class="thumb">
                                     <div class="overlay overlay-bg"></div>
                                     <img class="image img-fluid" src="visitors/img/p3.jpg" alt="">
                                 </div>
-                                <a href="visitors/img/p3.jpg" class="img-pop-up">	
+                                <a href="visitors/img/p3.jpg" class="img-pop-up">
                                     <div class="middle">
                                         <div class="text align-self-center d-flex"><img src="visitors/img/preview.png" alt=""></div>
                                     </div>
-                                </a> 
+                                </a>
 
                             </div>
                             <div class="p-inner">
@@ -259,12 +266,12 @@
                                     <div class="overlay overlay-bg"></div>
                                     <img class="image img-fluid" src="visitors/img/p4.jpg" alt="">
                                 </div>
-                                <a href="visitors/img/p4.jpg" class="img-pop-up">	
+                                <a href="visitors/img/p4.jpg" class="img-pop-up">
                                     <div class="middle">
                                         <div class="text align-self-center d-flex"><img src="visitors/img/preview.png" alt=""></div>
                                     </div>
-                                </a>                            		
-                            </div> 
+                                </a>
+                            </div>
                             <div class="p-inner">
                                 <h4>Embosed Logo Design</h4>
                                 <div class="cat">Portal</div>
@@ -276,11 +283,11 @@
                                     <div class="overlay overlay-bg"></div>
                                     <img class="image img-fluid" src="visitors/img/p5.jpg" alt="">
                                 </div>
-                                <a href="visitors/img/p5.jpg" class="img-pop-up">	
+                                <a href="visitors/img/p5.jpg" class="img-pop-up">
                                     <div class="middle">
                                         <div class="text align-self-center d-flex"><img src="visitors/img/preview.png" alt=""></div>
                                     </div>
-                                </a>                             		
+                                </a>
                             </div>
                             <div class="p-inner">
                                 <h4>3D Helmet Design</h4>
@@ -293,11 +300,11 @@
                                     <div class="overlay overlay-bg"></div>
                                     <img class="image img-fluid" src="visitors/img/p6.jpg" alt="">
                                 </div>
-                                <a href="visitors/img/p6.jpg" class="img-pop-up">	
+                                <a href="visitors/img/p6.jpg" class="img-pop-up">
                                     <div class="middle">
                                         <div class="text align-self-center d-flex"><img src="visitors/img/preview.png" alt=""></div>
                                     </div>
-                                </a>                             		
+                                </a>
                             </div>
                             <div class="p-inner">
                                 <h4>2D Vinyl Design</h4>
@@ -309,7 +316,7 @@
 
             </div>
         </section>
-        <!-- End portfolio-area Area -->	
+        <!-- End portfolio-area Area -->
 
         <!-- Start testimonial Area -->
         <section class="testimonial-area section-gap">
@@ -330,7 +337,7 @@
                             </div>
                             <div class="desc">
                                 <p>
-                                    Do you want to be even more successful? Learn to love learning and growth. The more effort you put into improving your skills, the bigger the payoff you.		     
+                                    Do you want to be even more successful? Learn to love learning and growth. The more effort you put into improving your skills, the bigger the payoff you.
                                 </p>
                                 <h4>Harriet Maxwell</h4>
                                 <p>CEO at Google</p>
@@ -364,7 +371,7 @@
                             <p>When someone does something that they know that they shouldn?t do, did they.</p>
                         </div>
                     </div>
-                </div>					
+                </div>
                 <div class="row">
                     <div class="col-lg-3 col-md-6 single-price">
                         <div class="top-part">
@@ -437,11 +444,11 @@
                             <h1>£499.00</h1>
                             <a class="price-btn text-uppercase" href="#">Buy Now</a>
                         </div>
-                    </div>																		
+                    </div>
                 </div>
-            </div>	
+            </div>
         </section>
-        <!-- End price Area -->			
+        <!-- End price Area -->
 
         <!-- Start recent-blog Area -->
         <section class="recent-blog-area section-gap">
@@ -454,10 +461,10 @@
                         </p>
                     </div>
                 </div>
-                <div class="row">	
+                <div class="row">
                     <div class="single-recent-blog col-lg-4 col-md-4">
                         <div class="thumb">
-                            <img class="f-img img-fluid mx-auto" src="visitors/img/b1.jpg" alt="">	
+                            <img class="f-img img-fluid mx-auto" src="visitors/img/b1.jpg" alt="">
                         </div>
                         <div class="bottom d-flex justify-content-between align-items-center flex-wrap">
                             <div>
@@ -469,7 +476,7 @@
                                 <span class="lnr lnr-heart"></span> 15
                                 <span class="lnr lnr-bubble"></span> 04
                             </div>
-                        </div>							
+                        </div>
                         <a href="#">
                             <h4>Break Through Self Doubt
                                 And Fear</h4>
@@ -480,7 +487,7 @@
                     </div>
                     <div class="single-recent-blog col-lg-4 col-md-4">
                         <div class="thumb">
-                            <img class="f-img img-fluid mx-auto" src="visitors/img/b2.jpg" alt="">	
+                            <img class="f-img img-fluid mx-auto" src="visitors/img/b2.jpg" alt="">
                         </div>
                         <div class="bottom d-flex justify-content-between align-items-center flex-wrap">
                             <div>
@@ -492,7 +499,7 @@
                                 <span class="lnr lnr-heart"></span> 15
                                 <span class="lnr lnr-bubble"></span> 04
                             </div>
-                        </div>							
+                        </div>
                         <a href="#">
                             <h4>Portable Fashion for
                                 young women</h4>
@@ -503,7 +510,7 @@
                     </div>
                     <div class="single-recent-blog col-lg-4 col-md-4">
                         <div class="thumb">
-                            <img class="f-img img-fluid mx-auto" src="visitors/img/b3.jpg" alt="">	
+                            <img class="f-img img-fluid mx-auto" src="visitors/img/b3.jpg" alt="">
                         </div>
                         <div class="bottom d-flex justify-content-between align-items-center flex-wrap">
                             <div>
@@ -515,7 +522,7 @@
                                 <span class="lnr lnr-heart"></span> 15
                                 <span class="lnr lnr-bubble"></span> 04
                             </div>
-                        </div>							
+                        </div>
                         <a href="#">
                             <h4>Do Dreams Serve As
                                 A Premonition</h4>
@@ -523,13 +530,13 @@
                         <p>
                             So many of us are demotivated to achieve anything. Such people are not enthusiastic about anything. They don?t want to work involved.
                         </p>
-                    </div>												
+                    </div>
 
 
                 </div>
-            </div>	
+            </div>
         </section>
-        <!-- end recent-blog Area -->	
+        <!-- end recent-blog Area -->
 
         <div class="modal" id="myModal">
             <div class="modal-dialog">
@@ -543,11 +550,46 @@
 
                     <!-- Modal body -->
                     <div class="modal-body">
-                        <s:form action="uploadImage" method="post" enctype="multipart/form-data">  
+                        <s:form action="uploadImage" method="post" enctype="multipart/form-data">
                             <s:hidden name="uploadId" id="uploadId"/>
-                            <s:file name="userImage" label="Image" />  
-                            <s:submit value="Upload" align="center" />  
-                        </s:form>  
+                            <s:file name="userImage" label="Image" />
+                            <s:submit value="Upload" align="center" />
+                        </s:form>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Edit Desc</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body-desc">
+                        <s:form action="updateDesc" method="post">
+                            <s:hidden name="uploadId" id="uploadId"/>
+                            <s:if test="uploadId==1">
+                                <s:textarea name="desc" label="Enter Description" />
+                            </s:if>
+                            <s:else>
+                                <s:textarea name="desc1" label="Enter Description" />
+                                <s:textarea name="desc2" label="Enter Description" />
+                            </s:else>
+
+                            <s:submit value="Save" align="center" />
+                        </s:form>
                     </div>
 
                     <!-- Modal footer -->
@@ -583,11 +625,11 @@
                 </div>
             </div>
         </section>
-        <!-- End brands Area -->			
+        <!-- End brands Area -->
 
 
         <!-- start footer Area -->
         <jsp:include page="/footer.jsp" />
-        <!-- End footer Area -->		
+        <!-- End footer Area -->
     </body>
 </html>

@@ -26,6 +26,8 @@ public class FileUploadAction extends ActionSupport {
     private String userImageContentType;
     private String userImageFileName;
     private int uploadId;
+    private String desc1;
+    private String desc2;
 
     CommonDao commonDao = new CommonDao();
 
@@ -43,6 +45,14 @@ public class FileUploadAction extends ActionSupport {
             Logger.getLogger(FileUploadAction.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        return SUCCESS;
+    }
+
+    public String updateDesc() {
+        if (uploadId == PageEnum.Home.getId()) {
+            desc2 = "";
+        }
+        commonDao.pageDetailDesc(uploadId, desc1, desc2);
         return SUCCESS;
     }
 
@@ -76,6 +86,22 @@ public class FileUploadAction extends ActionSupport {
 
     public void setUploadId(int uploadId) {
         this.uploadId = uploadId;
+    }
+
+    public String getDesc1() {
+        return desc1;
+    }
+
+    public void setDesc1(String desc1) {
+        this.desc1 = desc1;
+    }
+
+    public String getDesc2() {
+        return desc2;
+    }
+
+    public void setDesc2(String desc2) {
+        this.desc2 = desc2;
     }
 
 }

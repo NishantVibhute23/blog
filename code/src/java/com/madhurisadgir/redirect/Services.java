@@ -11,12 +11,15 @@ import com.madhurisadgir.bean.QuestionBean;
 import com.opensymphony.xwork2.ActionSupport;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import org.apache.struts2.dispatcher.SessionMap;
+import org.apache.struts2.interceptor.SessionAware;
 
 /**
  *
  * @author nishant.vibhute
  */
-public class Services extends ActionSupport {
+public class Services extends ActionSupport implements SessionAware {
 
     int paperId;
     List<QuestionBean> questionBeanList = new ArrayList<>();
@@ -25,6 +28,7 @@ public class Services extends ActionSupport {
     int notAttemptedAnswers = 0;
     int totalQuestions = 0;
     boolean isAnswerSubmitted = false;
+    private SessionMap<String, Object> sessionMap;
 
     public Services() {
     }
@@ -34,7 +38,12 @@ public class Services extends ActionSupport {
     }
 
     public String netSetExam() throws Exception {
-        return ActionSupport.SUCCESS;
+        boolean isLoggedIn = (boolean) sessionMap.get("login");
+        if (isLoggedIn) {
+            return ActionSupport.SUCCESS;
+        } else {
+            return "login";
+        }
     }
 
     public String startTest() {
@@ -43,6 +52,7 @@ public class Services extends ActionSupport {
         questionBeanList = netSetTestDao.getQuestions(NetSetType.BOTH.getId(), paperId, 5);
 
         return ActionSupport.SUCCESS;
+
     }
 
     public String submitTest() {
@@ -123,6 +133,19 @@ public class Services extends ActionSupport {
 
     public void setIsAnswerSubmitted(boolean isAnswerSubmitted) {
         this.isAnswerSubmitted = isAnswerSubmitted;
+    }
+
+    public SessionMap<String, Object> getSessionMap() {
+        return sessionMap;
+    }
+
+    public void setSessionMap(SessionMap<String, Object> sessionMap) {
+        this.sessionMap = sessionMap;
+    }
+
+    @Override
+    public void setSession(Map<String, Object> map) {
+        sessionMap = (SessionMap) map;
     }
 
 }

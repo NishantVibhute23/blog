@@ -1,0 +1,24 @@
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<!-- Author: guruprasad.tiwari -->
+
+<struts>
+    <package name="Services"  extends="struts-default">
+
+        <action name="netsettest" class="com.madhurisadgir.redirect.Services" method="netSetExam" >
+            <result name="success">pages/service/netsetdetail.jsp</result>
+            <result name="login">login</result>
+        </action>
+
+        <action name="starttest" class="com.madhurisadgir.redirect.Services" method="startTest" >
+            <result name="success">pages/service/online_net_set_test.jsp</result>
+        </action>
+
+        <action name="submitTest" class="com.madhurisadgir.redirect.Services" method="submitTest" >
+            <result name="success">pages/service/online_net_set_test.jsp</result>
+        </action>
+    </package>
+
+</struts>
