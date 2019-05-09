@@ -35,8 +35,12 @@
             <result name="success">about.jsp</result>
         </action>
         <action name="updateQualification" class="com.madhurisadgir.redirect.About" method="updateQualification">
-            <result name="success">about.jsp</result>
+            <result name="success" type="chain">about</result>
         </action>
+        <action name="deleteQualification" class="com.madhurisadgir.redirect.About" method="deleteQualification">
+            <result name="success" type="chain">about</result>
+        </action>
+        
 
         <action name="portfolio" class="com.madhurisadgir.redirect.Portfolio" >
             <result name="success">portfolio.jsp</result>
@@ -63,6 +67,21 @@
             <result name="success" type="chain">home</result>
 
         </action>
+        
+        <action name="uploadMyPhoto" class="com.madhurisadgir.redirect.FileUploadAction" method="uploadMyPhotos" >
+            <interceptor-ref name="fileUpload">
+                <param name="maximumSize">2097152</param>
+
+                <param name="allowedTypes">
+                    image/png,image/gif,image/jpeg,image/pjpeg
+                </param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+            <result name="success" type="chain">about</result>
+
+        </action>
+        
+        
         <action name="updateDesc" class="com.madhurisadgir.redirect.Home" method="updateDesc">
             <result name="success" type="chain">home</result>
         </action>
@@ -70,6 +89,12 @@
         <action name="updateDescFromAboutPage" class="com.madhurisadgir.redirect.About" method="updateDescFromAboutPage">
             <result name="success" type="chain">about</result>
         </action>
+
+<action name="deletePhoto" class="com.madhurisadgir.redirect.About" method="deleteMyPhoto">
+            <result name="success" type="chain">about</result>
+        </action>
+
+
 
     </package>
 </struts>

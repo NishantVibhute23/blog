@@ -46,6 +46,18 @@ public class FileUploadAction extends ActionSupport {
         return SUCCESS;
     }
 
+    public String uploadMyPhotos() {
+
+        String filePath = CommonUtil.getResourceProperty("photos.path") + CommonUtil.getResourceProperty("myphotos.folder") + File.separator;
+        File fileToCreate = new File(filePath, userImageFileName);
+        try {
+            FileUtils.copyFile(userImage, fileToCreate);
+        } catch (IOException ex) {
+            Logger.getLogger(FileUploadAction.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return SUCCESS;
+    }
+
     public File getUserImage() {
         return userImage;
     }

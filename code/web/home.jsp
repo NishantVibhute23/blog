@@ -157,7 +157,7 @@
                                 </s:if>
                             </s:if>
                         </p>
-                        <a href="#" class="primary-btn text-uppercase">View Full Details</a>
+                        <a href="about" class="primary-btn text-uppercase">View Full Details</a>
                     </div>
                 </div>
             </div>

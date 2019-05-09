@@ -7,7 +7,6 @@ package com.madhurisadgir.dao;
 
 import com.madhurisadgir.bean.PageDetail;
 import com.madhurisadgir.bean.Qualification;
-import com.madhurisadgir.enums.PageEnum;
 import com.madhurisadgir.util.DBUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -118,17 +117,38 @@ public class CommonDao {
         return qualList;
     }
 
-    public int updateQualification(List<Qualification> qualList) {
+    public int updateQualification(Qualification qualification) {
         int count = 0;
         try {
             con = db.getConnection();
-            for (Qualification qualification : qualList) {
-                PreparedStatement ps = con.prepareStatement("call updateQualificationDetail(?,?,?,?)");
-                ps.setString(1, qualification.getCourseName());
-                ps.setString(2, qualification.getCourseDesc());
-                ps.setString(3, qualification.getYear());
-                ps.setInt(4, qualification.getCourseId());
-                count = ps.executeUpdate();
+
+            PreparedStatement ps = con.prepareStatement("call updateQualificationDetail(?,?,?,?)");
+            ps.setString(1, qualification.getCourseName());
+            ps.setString(2, qualification.getCourseDesc());
+            ps.setString(3, qualification.getYear());
+            ps.setInt(4, qualification.getCourseId());
+            count = ps.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            db.closeConnection(con);
+        }
+        return count;
+    }
+
+    public int deleteQualification(int id) {
+        int count = 0;
+        try {
+            con = db.getConnection();
+
+            PreparedStatement ps = con.prepareStatement("call deleteQualification(?)");
+            ps.setInt(1, id);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                count = 1;
             }
 
         } catch (Exception e) {
