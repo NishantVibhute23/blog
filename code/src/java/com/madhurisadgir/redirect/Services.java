@@ -5,10 +5,12 @@
  */
 package com.madhurisadgir.redirect;
 
+import com.madhurisadgir.bean.QuestionBean;
 import com.madhurisadgir.dao.NetSetTestDao;
 import com.madhurisadgir.enums.NetSetType;
-import com.madhurisadgir.bean.QuestionBean;
 import com.opensymphony.xwork2.ActionSupport;
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +31,7 @@ public class Services extends ActionSupport implements SessionAware {
     int totalQuestions = 0;
     boolean isAnswerSubmitted = false;
     private SessionMap<String, Object> sessionMap;
+    public boolean isLoggedIn;
 
     public Services() {
     }
@@ -38,12 +41,11 @@ public class Services extends ActionSupport implements SessionAware {
     }
 
     public String netSetExam() throws Exception {
-        boolean isLoggedIn = (boolean) sessionMap.get("login");
-        if (isLoggedIn) {
-            return ActionSupport.SUCCESS;
-        } else {
-            return "login";
-        }
+
+        isLoggedIn = sessionMap.get("login") == null ? FALSE : TRUE;
+
+        return ActionSupport.SUCCESS;
+
     }
 
     public String startTest() {
@@ -146,6 +148,14 @@ public class Services extends ActionSupport implements SessionAware {
     @Override
     public void setSession(Map<String, Object> map) {
         sessionMap = (SessionMap) map;
+    }
+
+    public boolean isIsLoggedIn() {
+        return isLoggedIn;
+    }
+
+    public void setIsLoggedIn(boolean isLoggedIn) {
+        this.isLoggedIn = isLoggedIn;
     }
 
 }

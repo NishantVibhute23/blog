@@ -12,16 +12,16 @@
         </action>
 
         <action name="createUser" class = "com.madhurisadgir.redirect.Login" method = "createUser">
-            <result name = "success"> login.jsp </result>
+            <result name = "success" type="redirect">${backurl}</result>
             <result name = "error"> signup.jsp </result>
         </action>
         <action name="loginUser" class = "com.madhurisadgir.redirect.Login" method = "loginUser">
-            <result name = "success" type="chain"> home</result>
+            <result name = "success" type="redirect">${backurl}</result>
             <result name = "error"> login.jsp </result>
         </action>
 
         <action name="logoutUser" class = "com.madhurisadgir.redirect.Login" method = "logoutUser">
-            <result name = "success"> login.jsp </result>
+            <result name = "success" type="redirect">home</result>
         </action>
         <action name="forgotUserPass" class = "com.madhurisadgir.redirect.Login" method = "forgotUserPass">
             <result name = "success"> forgot.jsp </result>

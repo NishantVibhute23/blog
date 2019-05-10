@@ -10,6 +10,7 @@ import com.madhurisadgir.bean.UserBean;
 import com.madhurisadgir.dao.LoginDao;
 import com.madhurisadgir.util.CommonUtil;
 import com.madhurisadgir.util.EmailUtil;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.File;
 import java.io.IOException;
@@ -22,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.LineIterator;
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.SessionAware;
@@ -39,11 +41,14 @@ public class Login extends ActionSupport implements SessionAware, ServletRequest
     private HttpSession session = null;
     private String type = "";
     private String changepassLink;
+    String backurl;
+    LoginDao loginDao = new LoginDao();
 
     public Login() {
     }
 
     public String execute() {
+
         return ActionSupport.SUCCESS;
     }
 
@@ -52,7 +57,9 @@ public class Login extends ActionSupport implements SessionAware, ServletRequest
     }
 
     public String createUser() {
-        LoginDao loginDao = new LoginDao();
+        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
+        backurl = request.getHeader("referer");
+
         int id = loginDao.createUser(userBean);
         String returntype = ActionSupport.ERROR;
         if (id != 0) {
@@ -66,7 +73,10 @@ public class Login extends ActionSupport implements SessionAware, ServletRequest
     }
 
     public String loginUser() {
-        LoginDao loginDao = new LoginDao();
+
+        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
+        backurl = request.getHeader("referer");
+
         UserBean userBean1 = loginDao.loginUser(userBean);
         String returntype = ActionSupport.ERROR;
         if (userBean1.getUserName() != null) {
@@ -86,7 +96,7 @@ public class Login extends ActionSupport implements SessionAware, ServletRequest
     }
 
     public String forgotPasswordSendEmail() {
-        LoginDao loginDao = new LoginDao();
+
         String returntype = ActionSupport.ERROR;
         if (userBean.getUseremailId() == null || userBean.getUseremailId().equals("")) {
             messageBean.setSuccessMessage(CommonUtil.getResourceProperty("msg.failure.emailId"));
@@ -166,8 +176,12 @@ public class Login extends ActionSupport implements SessionAware, ServletRequest
 //        return forwardPath;
 //    }
     public String logoutUser() {
+
         String returntype = ActionSupport.ERROR;
+
         if (sessionMap != null) {
+            UserBean userBean = (UserBean) sessionMap.get("userBean");
+            loginDao.logOutUser(userBean);
             sessionMap.invalidate();
             messageBean.setSuccessMessage(CommonUtil.getResourceProperty("message.user.logout.success"));
             returntype = ActionSupport.SUCCESS;
@@ -234,6 +248,14 @@ public class Login extends ActionSupport implements SessionAware, ServletRequest
 
     public HttpServletRequest getServletRequest() {
         return this.request;
+    }
+
+    public String getBackurl() {
+        return backurl;
+    }
+
+    public void setBackurl(String backurl) {
+        this.backurl = backurl;
     }
 
 }

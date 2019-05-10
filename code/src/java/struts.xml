@@ -90,10 +90,14 @@
             <result name="success" type="chain">about</result>
         </action>
 
-<action name="deletePhoto" class="com.madhurisadgir.redirect.About" method="deleteMyPhoto">
+        <action name="deletePhoto" class="com.madhurisadgir.redirect.About" method="deleteMyPhoto">
             <result name="success" type="chain">about</result>
         </action>
 
+
+<action name="chat" class="Chat" method="deleteMyPhoto">
+            <result name="success" >chat.jsp</result>
+        </action>
 
 
     </package>
