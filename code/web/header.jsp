@@ -24,6 +24,114 @@
 <link rel="stylesheet" type="text/css" href="visitors/css/util.css">
 <link rel="stylesheet" type="text/css" href="visitors/css/main_login.css">
 
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+* {box-sizing: border-box;}
+
+.open-img{
+      color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  /*opacity: 0.8;*/
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  width: 130px;
+}
+
+/* The popup chat - hidden by default */
+.chat-popup {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 15px;
+ 
+  z-index: 9;
+   max-width: 400px;
+   width: 400px;
+       border-radius: 10px;
+       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+/* Add styles to the form container */
+.form-container {
+  max-width: 400px;
+  padding: 0px;
+  background-color: white;
+}
+
+/* Full-width textarea */
+.form-container textarea {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+  resize: none;
+  min-height: 200px;
+  
+}
+
+.win-head{
+    width: 100%;
+ 
+  border: none;
+  background: rgb(1,81,102);
+  resize: none;
+  min-height:50px;
+}
+
+.win-area{
+    width: 100%;
+ 
+  border: none;
+  background: white;
+  resize: none;
+  min-height: 350px;
+}
+
+.win-footer{
+    width: 100%;
+ 
+  border: none;
+  background: #f1f1f1;
+  resize: none;
+  min-height: 50px;
+  background: rgb(1,81,102);
+}
+
+/* When the textarea gets focus, do something */
+.form-container textarea:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit/send button */
+.form-container .btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom:10px;
+  opacity: 0.8;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: red;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
+}
+
+.inbox_chat {width: 100%; height: 350px; overflow-y: scroll;padding-left: 10px;padding-top: 5px}
+</style>
+
 <script>
    
    function showSignUp(){
@@ -39,6 +147,13 @@
       
    }
    
+   function openForm() {
+  document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+}
     </script>
 
 
@@ -78,7 +193,7 @@
 
                     <s:if test="#session.login">
                                 <s:if test="#session.userBean.userType == 1">
-                                    <li><a href="chat">Contact</a></li>
+                                    <li><a href="chat">Chat</a></li>
                                 </s:if>
                             </s:if>
                     
@@ -118,7 +233,7 @@
                         <div class="wrap-login100">
 
                             <div id="loginDiv">
-                                <form class="login100-form validate-form" action="loginUser">
+                                <form class="login100-form validate-form" action="loginUser" method="post">
                                     <s:if test="messageBean.errorMessage != null">
                                         <div class="alert alert-danger">
                                             <s:property value="messageBean.errorMessage"/>
@@ -246,3 +361,88 @@
         </div>
     </div>
 </div>
+            
+            
+            
+            <img class="open-img" onclick="openForm()" src="visitors/img/chat-bubble.png"/>
+
+<div class="chat-popup" id="myForm">
+     <div class="form-container">
+         <div class="win-head">
+             <span style="float:left;margin-left:  15px;margin-top: 17px ;font: 16px arial, sans-serif;color: white;font-weight: bold ">Chat with XYZ</span>
+        <span style="float:right;margin-right: 15px;margin-top: 10px"><i style="color: white"  onclick="closeForm()" class="fa fa-angle-down fa-2x" aria-hidden="true"></i></span>
+    </div>
+    <div  class="win-area">
+        <div class="inbox_chat">
+            <div class="incoming_msg">
+              
+              <div class="received_msg">
+                <div class="received_withd_msg">
+                  <p>Test, which is a new approach to have</p>
+                  <span class="time_date"> 11:01 AM    |    Yesterday</span></div>
+              </div>
+            </div>
+            <div class="outgoing_msg">
+              <div class="sent_msg">
+                <p>Apollo University, Delhi, India Test</p>
+                <span class="time_date"> 11:01 AM    |    Today</span> </div>
+            </div><div class="incoming_msg">
+              
+              <div class="received_msg">
+                <div class="received_withd_msg">
+                  <p>Test, which is a new approach to have</p>
+                  <span class="time_date"> 11:01 AM    |    Yesterday</span></div>
+              </div>
+            </div>
+            <div class="outgoing_msg">
+              <div class="sent_msg">
+                <p>Apollo University, Delhi, India Test</p>
+                <span class="time_date"> 11:01 AM    |    Today</span> </div>
+            </div><div class="incoming_msg">
+              
+              <div class="received_msg">
+                <div class="received_withd_msg">
+                  <p>Test, which is a new approach to have</p>
+                  <span class="time_date"> 11:01 AM    |    Yesterday</span></div>
+              </div>
+            </div>
+            <div class="outgoing_msg">
+              <div class="sent_msg">
+                <p>Apollo University, Delhi, India Test</p>
+                <span class="time_date"> 11:01 AM    |    Today</span> </div>
+            </div><div class="incoming_msg">
+              
+              <div class="received_msg">
+                <div class="received_withd_msg">
+                  <p>Test, which is a new approach to have</p>
+                  <span class="time_date"> 11:01 AM    |    Yesterday</span></div>
+              </div>
+            </div>
+            <div class="outgoing_msg">
+              <div class="sent_msg">
+                <p>Apollo University, Delhi, India Test</p>
+                <span class="time_date"> 11:01 AM    |    Today</span> </div>
+            </div>
+        </div>
+    </div>
+    <div  class="win-footer">
+        <div style="height: 44px;width:84%;background-color: white;margin-top: 3px;float: left;margin-left: 3px">
+            <input type="text" placeholder="Type message here" style="width: 100%;padding: 9px"/>
+        </div>
+        <span style="float: right"><i class="fa fa-paper-plane fa-2x" style="color: white;margin-right: 15px;margin-top: 9px" aria-hidden="true"></i></span>
+    </div>
+         
+     </div>
+    
+<!--  <form action="/action_page.php" class="form-container">
+    <h1>Chat</h1>
+
+    <label for="msg"><b>Message</b></label>
+    <textarea placeholder="Type message.." name="msg" required></textarea>
+
+    <button type="submit" class="btn">Send</button>
+    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+  </form>-->
+</div>
+
+

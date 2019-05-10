@@ -95,10 +95,21 @@
         </action>
 
 
-<action name="chat" class="Chat" method="deleteMyPhoto">
+<action name="chat" class="com.madhurisadgir.redirect.Chat">
             <result name="success" >chat.jsp</result>
         </action>
 
+<action name="getChatData" class="com.madhurisadgir.redirect.Chat" method="getUserChat">
+            <result type="stream">
+                <param name="contentType">text/plain</param>
+            </result>
+        </action>
+        
+        <action name="sendAdminMessage" class="com.madhurisadgir.redirect.Chat" method="adminSendMessage">
+            <result type="stream">
+                <param name="contentType">text/plain</param>
+            </result>
+        </action>
 
     </package>
 </struts>

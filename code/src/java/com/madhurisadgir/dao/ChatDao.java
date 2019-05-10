@@ -7,8 +7,6 @@ package com.madhurisadgir.dao;
 
 import com.madhurisadgir.bean.AdminChat;
 import com.madhurisadgir.bean.ChatBean;
-import com.madhurisadgir.bean.UserBean;
-import com.madhurisadgir.enums.UserType;
 import com.madhurisadgir.util.DBUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -25,18 +23,24 @@ public class ChatDao {
     DBUtil db = new DBUtil();
     Connection con;
 
-    public List<ChatBean> getUserChat(UserBean user) {
+    public List<ChatBean> getUserChat(int userId) {
         List<ChatBean> chatList = new ArrayList<>();
         try {
             con = db.getConnection();
             PreparedStatement ps = con.prepareStatement("call getUserChat(?)");
-            ps.setInt(1, user.getUserId());
+            ps.setInt(1, userId);
 
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
                 ChatBean chatBean = new ChatBean();
                 chatBean.setChatId(rs.getInt(1));
+                chatBean.setFromUserId(rs.getInt(2));
+                chatBean.setByUserId(rs.getInt(3));
+                chatBean.setToUserName(rs.getString(4));
+                chatBean.setMssg(rs.getString(5));
+                chatBean.setMsgTime(rs.getString(6));
+                chatBean.setMsgDate(rs.getString(7));
 
                 chatList.add(chatBean);
             }
@@ -54,18 +58,18 @@ public class ChatDao {
 
         try {
             con = db.getConnection();
-            PreparedStatement ps = con.prepareStatement("call getAdminMessage(?)");
-            ps.setInt(1, UserType.ADMIN.getId());
+            PreparedStatement ps = con.prepareStatement("call getRecentChatNames()");
 
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
                 AdminChat adminChat = new AdminChat();
-                adminChat.setChatId(rs.getInt(1));
-                adminChat.setUserId(rs.getInt(2));
-                adminChat.setUserName(rs.getString(3));
-                adminChat.setIsLoggedIn(rs.getInt(4) == 1 ? true : false);
-                adminChat.setLogoutTIme(rs.getString(5));
+
+                adminChat.setUserId(rs.getInt(1));
+                adminChat.setUserName(rs.getString(2));
+                adminChat.setIsLoggedIn(rs.getInt(3) == 1 ? true : false);
+                adminChat.setLogoutTIme(rs.getString(4));
+                adminChat.setLastChatDate(rs.getString(5));
                 mssgList.add(adminChat);
             }
 
@@ -77,4 +81,29 @@ public class ChatDao {
         return mssgList;
 
     }
+
+    public int sendMessage(int fromUserId, int msgByUserId, String msg) {
+        int count = 0;
+        try {
+            con = db.getConnection();
+            PreparedStatement ps = con.prepareStatement("call sendMessage(?,?,?)");
+            ps.setInt(1, fromUserId);
+            ps.setInt(2, msgByUserId);
+            ps.setString(3, msg);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                count = 1;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            db.closeConnection(con);
+        }
+        return count;
+
+    }
+
 }

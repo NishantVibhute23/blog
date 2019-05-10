@@ -12,8 +12,13 @@ package com.madhurisadgir.bean;
 public class ChatBean {
 
     private int chatId;
-    UserBean user;
+    private int fromUserId;
+    private int byUserId;
+    private String fromUserName;
+    private String toUserName;
     private String mssg;
+    private String msgDate;
+    private String msgTime;
 
     public int getChatId() {
         return chatId;
@@ -23,12 +28,36 @@ public class ChatBean {
         this.chatId = chatId;
     }
 
-    public UserBean getUser() {
-        return user;
+    public int getFromUserId() {
+        return fromUserId;
     }
 
-    public void setUser(UserBean user) {
-        this.user = user;
+    public void setFromUserId(int fromUserId) {
+        this.fromUserId = fromUserId;
+    }
+
+    public int getByUserId() {
+        return byUserId;
+    }
+
+    public void setByUserId(int byUserId) {
+        this.byUserId = byUserId;
+    }
+
+    public String getFromUserName() {
+        return fromUserName;
+    }
+
+    public void setFromUserName(String fromUserName) {
+        this.fromUserName = fromUserName;
+    }
+
+    public String getToUserName() {
+        return toUserName;
+    }
+
+    public void setToUserName(String toUserName) {
+        this.toUserName = toUserName;
     }
 
     public String getMssg() {
@@ -37,6 +66,22 @@ public class ChatBean {
 
     public void setMssg(String mssg) {
         this.mssg = mssg;
+    }
+
+    public String getMsgDate() {
+        return msgDate;
+    }
+
+    public void setMsgDate(String msgDate) {
+        this.msgDate = msgDate;
+    }
+
+    public String getMsgTime() {
+        return msgTime;
+    }
+
+    public void setMsgTime(String msgTime) {
+        this.msgTime = msgTime;
     }
 
 }
