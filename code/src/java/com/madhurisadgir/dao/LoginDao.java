@@ -45,6 +45,23 @@ public class LoginDao {
         return id;
     }
 
+    public void logOutUser(UserBean user) {
+
+        try {
+            con = db.getConnection();
+            PreparedStatement ps1 = con.prepareStatement("call updateUserLoginLogout(?,?)");
+            ps1.setInt(1, user.getUserId());
+            ps1.setInt(2, 0);
+            ps1.executeQuery();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            db.closeConnection(con);
+        }
+
+    }
+
     public UserBean loginUser(UserBean user) {
         UserBean userBean = new UserBean();
         try {
@@ -61,6 +78,11 @@ public class LoginDao {
                 userBean.setUserName(rs.getString(2));
                 userBean.setUseremailId(rs.getString(3));
                 userBean.setUserType(rs.getInt(4));
+
+                PreparedStatement ps1 = con.prepareStatement("call updateUserLoginLogout(?,?)");
+                ps1.setInt(1, rs.getInt(1));
+                ps1.setInt(2, 1);
+                ps1.executeQuery();
 
             }
 

@@ -9,7 +9,7 @@
 
         <action name="netsettest" class="com.madhurisadgir.redirect.Services" method="netSetExam" >
             <result name="success">pages/service/netsetdetail.jsp</result>
-            <result name="login">login</result>
+            <result name="login" type="chain">login</result>
         </action>
 
         <action name="starttest" class="com.madhurisadgir.redirect.Services" method="startTest" >

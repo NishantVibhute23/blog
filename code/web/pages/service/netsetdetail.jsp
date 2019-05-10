@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
+    <%@taglib prefix="s" uri="/struts-tags" %>
     <head>
         <!-- Mobile Specific Meta -->
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -80,7 +81,15 @@
                                
                             </div>
                             <div class="card-footer bg-info">
-                                <a href="starttest?paperId=1" class="text-white">Start Test</a>
+                                
+                                <s:if test="isLoggedIn">
+                                    <a href="starttest?paperId=1" class="text-white">Start Test</a>
+                                </s:if>
+                                <s:else>
+                                    <a href="#" class="text-white" data-toggle="modal" data-target="#myModal">Start Test</a>
+                                </s:else>
+                                
+                                
                             </div>
                         </div>
                     </div>
@@ -95,7 +104,12 @@
                                
                             </div>
                             <div class="card-footer bg-info">
-                                <a href="starttest?paperId=2" class="text-white">Start Test</a>
+                                <s:if test="isLoggedIn">
+                                    <a href="starttest?paperId=2" class="text-white">Start Test</a>
+                                </s:if>
+                                <s:else>
+                                    <a href="#"  class="text-white" data-toggle="modal" data-target="#myModal">Start Test</a>
+                                </s:else>
                             </div>
                         </div>
                     </div>

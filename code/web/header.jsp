@@ -7,6 +7,43 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
+<script src="visitors/js/vendor/jquery-2.2.4.min.js"></script>
+<script src="visitors/js/main_login.js"></script>
+<link rel="icon" type="image/png" href="visitors/img/icons/favicon.ico"/>
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="visitors/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="visitors/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="visitors/vendor/animate/animate.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="visitors/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="visitors/vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="visitors/css/util.css">
+<link rel="stylesheet" type="text/css" href="visitors/css/main_login.css">
+
+<script>
+   
+   function showSignUp(){
+       
+       document.getElementById("loginDiv").style.display = "none";
+       document.getElementById("signUpDiv").style.display = "block";
+   }
+   
+  function showLogin(){
+       
+       document.getElementById("loginDiv").style.display = "block";
+       document.getElementById("signUpDiv").style.display = "none";
+      
+   }
+   
+    </script>
+
+
+
+
 <header id="header">
     <div class="container main-menu">
         <div class="row align-items-center justify-content-between d-flex">
@@ -40,6 +77,12 @@
                     <li><a href="contactme">Contact</a></li>
 
                     <s:if test="#session.login">
+                                <s:if test="#session.userBean.userType == 1">
+                                    <li><a href="chat">Contact</a></li>
+                                </s:if>
+                            </s:if>
+                    
+                    <s:if test="#session.login">
                         <li class="menu-has-children"><a href=""><s:property value="#session.userBean.userName"/></a>
                             <ul>
                                 <li><a href="">My Profile</a></li>
@@ -48,15 +91,158 @@
                             </ul>
                         </li>
 
-
-
                     </s:if>
                     <s:else>
-                        <li><a href="login">Login</a></li>
-                        </s:else>
+                        <li>
+                            <!--<a href="login">Login</a>-->
+
+                            <a href="#" data-id="1" class="open-uploadDialog-textArea" data-toggle="modal" data-target="#myModal">Login</a>
+                        </li>
+                    </s:else>
 
                 </ul>
             </nav><!-- #nav-menu-container -->
         </div>
     </div>
 </header><!-- #header -->
+
+
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal body -->
+            <div class="modal-body" style="padding: 0px !important">
+                <div class="limiter">
+                    <div class="container-login100">
+                        <div class="wrap-login100">
+
+                            <div id="loginDiv">
+                                <form class="login100-form validate-form" action="loginUser">
+                                    <s:if test="messageBean.errorMessage != null">
+                                        <div class="alert alert-danger">
+                                            <s:property value="messageBean.errorMessage"/>
+                                        </div>
+                                    </s:if>
+                                    <span class="login100-form-title">
+                                        Login
+                                    </span>
+
+                                    <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+                                        <input class="input100" type="text" name="userBean.useremailId" placeholder="Email">
+                                        <span class="focus-input100"></span>
+                                        <span class="symbol-input100">
+                                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+
+                                    <div class="wrap-input100 validate-input" data-validate = "Password is required">
+                                        <input class="input100" type="password" name="userBean.userpassword" placeholder="Password">
+                                        <span class="focus-input100"></span>
+                                        <span class="symbol-input100">
+                                            <i class="fa fa-lock" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+
+                                    <div class="container-login100-form-btn">
+                                        <button class="login100-form-btn">
+                                            Login
+                                        </button>
+                                    </div>
+
+                                    <div class="text-center p-t-12">
+                                        <span class="txt1">
+                                            Forgot
+                                        </span>
+                                        <a class="txt2" href="<s:url action="forgotUserPass"/>">
+                                            Username / Password?
+                                        </a>
+                                    </div>
+
+                                    <div class="text-center p-t-136">
+                                        <a id="signUpLink" onclick="showSignUp()" class="txt2" href="#" >
+                                            Create your Account
+                                            
+                                        </a>
+                                    </div>
+                                </form>
+                            </div>
+
+                                            <div id="signUpDiv" style="display: none">
+                                <form class="login100-form validate-form" action="createUser" method="post">
+                                    <s:if test="messageBean.errorMessage != null">
+                                        <div class="alert alert-danger">
+                                            <s:property value="messageBean.errorMessage"/>
+                                        </div>
+                                    </s:if>
+                                    <span class="login100-form-title">
+                                        Sign Up
+                                    </span>
+
+
+                                    <div class="wrap-input100 validate-input" data-validate = "Name is required">
+                                        <input class="input100" type="text" name="userBean.userName" placeholder="Your Name">
+                                        <span class="focus-input100"></span>
+                                        <span class="symbol-input100">
+                                            <i class="fa fa-user" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+
+                                    <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+                                        <input class="input100" type="text" name="userBean.useremailId" placeholder="Your Email">
+                                        <span class="focus-input100"></span>
+                                        <span class="symbol-input100">
+                                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+
+                                    <div class="wrap-input100 validate-input" data-validate = "Password is required">
+                                        <input class="input100" type="password" name="userBean.userpassword" placeholder="Password">
+                                        <span class="focus-input100"></span>
+                                        <span class="symbol-input100">
+                                            <i class="fa fa-lock" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+
+                                    <div class="wrap-input100 validate-input" data-validate = "Repeat Password is required">
+                                        <input class="input100" type="password" name="userBean.userRepeatPassword" placeholder="Repeat Password">
+                                        <span class="focus-input100"></span>
+                                        <span class="symbol-input100">
+                                            <i class="fa fa-lock" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+
+                                    <div class="container-login100-form-btn">
+                                        <button class="login100-form-btn">
+                                            Sign UP
+                                        </button>
+                                    </div>
+
+
+
+                                    <div class="text-center p-t-52">
+                                         Already registered. 
+                                        <a id="loginLink" onclick="showLogin()" class="txt2" href="#">
+                                           Login to continue
+                                            
+                                        </a>
+                                    </div>
+                                </form>
+                            </div>               
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Modal footer -->
+            <!--            <div class="modal-footer" style="justify-content: center !important">
+            <s:submit  cssClass="btn btn-primary" value="Upload" align="center" />
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>-->
+
+        </div>
+    </div>
+</div>
