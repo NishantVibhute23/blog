@@ -5,6 +5,7 @@
  */
 package com.madhurisadgir.dao;
 
+import com.madhurisadgir.bean.AdminChat;
 import com.madhurisadgir.bean.ChatBean;
 import com.madhurisadgir.bean.UserBean;
 import com.madhurisadgir.enums.UserType;
@@ -48,7 +49,32 @@ public class ChatDao {
         return chatList;
     }
 
-    public void writeMessage() {
+    public List<AdminChat> getMessagesForAdmin() {
+        List<AdminChat> mssgList = new ArrayList<>();
+
+        try {
+            con = db.getConnection();
+            PreparedStatement ps = con.prepareStatement("call getAdminMessage(?)");
+            ps.setInt(1, UserType.ADMIN.getId());
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                AdminChat adminChat = new AdminChat();
+                adminChat.setChatId(rs.getInt(1));
+                adminChat.setUserId(rs.getInt(2));
+                adminChat.setUserName(rs.getString(3));
+                adminChat.setIsLoggedIn(rs.getInt(4) == 1 ? true : false);
+                adminChat.setLogoutTIme(rs.getString(5));
+                mssgList.add(adminChat);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            db.closeConnection(con);
+        }
+        return mssgList;
 
     }
 }
