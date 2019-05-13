@@ -16,6 +16,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
+import twitter4j.ResponseList;
+import twitter4j.Status;
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
+import twitter4j.TwitterFactory;
+import twitter4j.http.AccessToken;
 
 /**
  *
@@ -99,6 +105,32 @@ public class About extends ActionSupport {
             list.add(i);
         }
         return list;
+    }
+
+    public void getTwitterTimeline() {
+        String accessTokenStr = "";
+        String accessTokenSecretStr = "";
+        String consumerKeyStr = "";
+        String consumerSecretStr = "";
+
+        Twitter twitter = new TwitterFactory().getInstance();
+
+        AccessToken accessToken = new AccessToken(accessTokenStr, accessTokenSecretStr);
+        twitter.setOAuthConsumer(consumerKeyStr, consumerSecretStr);
+        twitter.setOAuthAccessToken(accessToken);
+
+        try {
+            ResponseList<Status> statuses = twitter.getHomeTimeline();
+            System.out.println("Showing home timeline.");
+            for (Status status : statuses) {
+                System.out.println(status.getUser().getName() + ":"
+                        + status.getText());
+            }
+        } catch (TwitterException te) {
+            te.printStackTrace();
+            System.out.println("Failed to search tweets: " + te.getMessage());
+        }
+
     }
 
     public PageDetail getPersonalDetail() {
