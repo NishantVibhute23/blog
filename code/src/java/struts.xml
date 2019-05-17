@@ -113,9 +113,5 @@
             </result>
         </action>
         
-        <action name="message" class="com.madhurisadgir.redirect.MessageAction" method="execute">
-        <result name="success">chatindex.jsp</result>
-        </action>
-
     </package>
 </struts>

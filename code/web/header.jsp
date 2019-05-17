@@ -135,91 +135,62 @@
     }
 
     .inbox_chat {width: 100%; height: 350px; overflow-y: scroll;padding-left: 10px;padding-top: 5px}
-    
+
     .received_msg {
-                display: inline-block;
-                padding: 0 0 0 10px;
-                vertical-align: top;
-                width: 92%;
-            }
-            .received_withd_msg p {
-                background: #ebebeb none repeat scroll 0 0;
-                border-radius: 3px;
-                color: #646464;
-                font-size: 14px;
-                margin: 0;
-                padding: 5px 10px 5px 12px;
-                width: 100%;
-            }
-            .time_date {
-                color: #747474;
-                display: block;
-                font-size: 12px;
-                margin: 8px 0 0;
-            }
+        display: inline-block;
+        padding: 0 0 0 10px;
+        vertical-align: top;
+        width: 92%;
+    }
+    .received_withd_msg p {
+        background: #ebebeb none repeat scroll 0 0;
+        border-radius: 3px;
+        color: #646464;
+        font-size: 14px;
+        margin: 0;
+        padding: 5px 10px 5px 12px;
+        width: 100%;
+    }
+    .time_date {
+        color: #747474;
+        display: block;
+        font-size: 12px;
+        margin: 8px 0 0;
+    }
 
-            .time_date_right {
-                color: #747474;
-                display: block;
-                font-size: 12px;
-                margin: 8px 0 0;
-                text-align: right
-            }
-            .received_withd_msg { width: 57%;}
-            .mesgs {
-                float: left;
-                padding: 0px 15px 0 25px;
-                width: 70%;
-                background-color: white
-            }
+    .time_date_right {
+        color: #747474;
+        display: block;
+        font-size: 12px;
+        margin: 8px 0 0;
+        text-align: right
+    }
+    .received_withd_msg { width: 57%;}
+    .mesgs {
+        float: left;
+        padding: 0px 15px 0 25px;
+        width: 70%;
+        background-color: white
+    }
 
-            .sent_msg p {
-                background: #05728f none repeat scroll 0 0;
-                border-radius: 3px;
-                font-size: 14px;
-                margin: 0; color:#fff;
-                padding: 5px 10px 5px 12px;
-                width:100%;
-            }
-            .outgoing_msg{ overflow:hidden; margin:26px 0 26px;}
-            .sent_msg {
-                float: right;
-                width: 46%;
-            }
+    .sent_msg p {
+        background: #05728f none repeat scroll 0 0;
+        border-radius: 3px;
+        font-size: 14px;
+        margin: 0; color:#fff;
+        padding: 5px 10px 5px 12px;
+        width:100%;
+    }
+    .outgoing_msg{ overflow:hidden; margin:26px 0 26px;}
+    .sent_msg {
+        float: right;
+        width: 46%;
+    }
 </style>
 
 <script>
 
-var webSocket = new WebSocket("ws://192.168.2.80:8084/madhurisadgir/ws/websocket");
-        var echoText = document.getElementById("echoText");
-        echoText.value = "";
-        var message = document.getElementById("message");
-        webSocket.onopen = function(message){ wsOpen(message);};
-        webSocket.onmessage = function(message){ wsGetMessage(message);};
-        webSocket.onclose = function(message){ wsClose(message);};
-        webSocket.onerror = function(message){ wsError(message);};
-        function wsOpen(message){
-            echoText.value += "Connected ... \n";
-        }
-        function wsSendMessage(){
-            webSocket.send(message.value);
-            echoText.value += "Message sended to the server : " + message.value + "\n";
-            message.value = "";
-        }
-        function wsCloseConnection(){
-            webSocket.close();
-        }
-        function wsGetMessage(message){
-            echoText.value += "Message received from to the server : " + message.data + "\n";
-        }
-        function wsClose(message){
-            echoText.value += "Disconnect ... \n";
-        }
- 
-        function wsError(message){
-            echoText.value += "Error ... \n";
-        }
-
+    
 
 
     function showSignUp() {
@@ -450,93 +421,139 @@ var webSocket = new WebSocket("ws://192.168.2.80:8084/madhurisadgir/ws/websocket
     </div>
 </div>
 
-
-
-<img class="open-img" onclick="openForm()" src="visitors/img/chat-bubble.png"/>
-
-<div class="chat-popup" id="myForm">
-    <div class="form-container">
-        <div class="win-head">
-            <span style="float:left;margin-left:  15px;margin-top: 17px ;font: 16px arial, sans-serif;color: white;font-weight: bold ">Chat with XYZ</span>
-            <span style="float:right;margin-right: 15px;margin-top: 10px"><i style="color: white"  onclick="closeForm()" class="fa fa-angle-down fa-2x" aria-hidden="true"></i></span>
-        </div>
-        <div  class="win-area">
-            <div class="inbox_chat">
-                <div class="incoming_msg">
-
-                    <div class="received_msg">
-                        <div class="received_withd_msg">
-                            <p>Test, which is a new approach to have</p>
-                            <span class="time_date"> 11:01 AM    |    Yesterday</span></div>
-                    </div>
-                </div>
-                <div class="outgoing_msg">
-                    <div class="sent_msg">
-                        <p>Apollo University, Delhi, India Test</p>
-                        <span class="time_date"> 11:01 AM    |    Today</span> </div>
-                </div><div class="incoming_msg">
-
-                    <div class="received_msg">
-                        <div class="received_withd_msg">
-                            <p>Test, which is a new approach to have</p>
-                            <span class="time_date"> 11:01 AM    |    Yesterday</span></div>
-                    </div>
-                </div>
-                <div class="outgoing_msg">
-                    <div class="sent_msg">
-                        <p>Apollo University, Delhi, India Test</p>
-                        <span class="time_date"> 11:01 AM    |    Today</span> </div>
-                </div><div class="incoming_msg">
-
-                    <div class="received_msg">
-                        <div class="received_withd_msg">
-                            <p>Test, which is a new approach to have</p>
-                            <span class="time_date"> 11:01 AM    |    Yesterday</span></div>
-                    </div>
-                </div>
-                <div class="outgoing_msg">
-                    <div class="sent_msg">
-                        <p>Apollo University, Delhi, India Test</p>
-                        <span class="time_date"> 11:01 AM    |    Today</span> </div>
-                </div><div class="incoming_msg">
-
-                    <div class="received_msg">
-                        <div class="received_withd_msg">
-                            <p>Test, which is a new approach to have</p>
-                            <span class="time_date"> 11:01 AM    |    Yesterday</span></div>
-                    </div>
-                </div>
-                <div class="outgoing_msg">
-                    <div class="sent_msg">
-                        <p>Apollo University, Delhi, India Test</p>
-                        <span class="time_date"> 11:01 AM    |    Today</span> </div>
-                </div>
-            </div>
-        </div>
-        <div  class="win-footer">
-            <div style="background-color: white;margin: 2px 2px 2px 2px;position: absolute;width: 99%;height: 45px">
-                <input type="text" placeholder="Type message here" style="width: 85%;padding: 9px"/>
-                
-                <div style="border-radius: 50px;width: 35px;height: 35px;background-color: rgb(1,81,102);float: right;margin-top: 5px;margin-right: 10px">
-                    
-                    <i class="fa fa-paper-plane-o fa-lg" style="color: white;position: absolute;margin-top: 10px;margin-left: 6px" aria-hidden="true"></i>
-                </div>
-        </div>
+<s:if test="#session.login">
+    <s:if test="#session.userBean.userType == 2">
+ 
         
-   
+        
+        <img class="open-img" onclick="openForm()" src="visitors/img/chat-bubble.png"/>
+
+        <div class="chat-popup" id="myForm">
+            <div class="form-container">
+                <div class="win-head">
+                    <input type="hidden" id="uid" value="<s:property value="%{#session.userBean.userId}"/>"/>
+                    <span style="float:left;margin-left:  15px;margin-top: 17px ;font: 16px arial, sans-serif;color: white;font-weight: bold ">Chat with XYZ </span>
+                    <span style="float:right;margin-right: 15px;margin-top: 10px"><i style="color: white"  onclick="closeForm()" class="fa fa-angle-down fa-2x" aria-hidden="true"></i></span>
+                </div>
+                <div  class="win-area">
+                    <div class="msg_history" id="msgHis">
+
+
+
+                            </div>
+                </div>
+                <div  class="win-footer">
+                    <div style="background-color: white;margin: 2px 2px 2px 2px;position: absolute;width: 99%;height: 45px">
+                        <input type="text" id="message" placeholder="Type message here" style="width: 85%;padding: 9px"/>
+
+                        <div style="border-radius: 50px;width: 35px;height: 35px;background-color: rgb(1,81,102);float: right;margin-top: 5px;margin-right: 10px">
+
+                            <i onclick="wsSendMessage();" class="fa fa-paper-plane-o fa-lg" style="color: white;position: absolute;margin-top: 10px;margin-left: 6px" aria-hidden="true"></i>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+            <!--  <form action="/action_page.php" class="form-container">
+                <h1>Chat</h1>
+            
+                <label for="msg"><b>Message</b></label>
+                <textarea placeholder="Type message.." name="msg" required></textarea>
+            
+                <button type="submit" class="btn">Send</button>
+                <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+              </form>-->
         </div>
+                    
+                           
+                    
+    </s:if>
+</s:if>
+        
+        
+<s:if test="#session.login">
+        <script>
+           
+            var webSocket = new WebSocket("ws://192.168.2.80:8084/madhurisadgir/ws/websocket");
+//    var echoText = document.getElementById("echoText");
+//    echoText.value = "";
+    var message = document.getElementById("message");
+    webSocket.onopen = function (message) {
+        var subject = document.getElementById('uid').value;
+      var content = "Connected";
+      var json = { 
+        'uid' : subject,
+        'content' : content
+      };
+      webSocket.send(JSON.stringify(json));
+        
+              
+//        wsOpen(message);
+       
+    };
+    webSocket.onmessage = function (message) {
+        wsGetMessage(message);
+    };
+    webSocket.onclose = function (message) {
+        wsClose(message);
+    };
+    webSocket.onerror = function (message) {
+        wsError(message);
+    };
+    function wsOpen(message) {
+        
+       alert("Connected ... \n");
+    }
+    function wsSendMessage() {
+       
+       var outMsg = '<div class="outgoing_msg">\n\
+                                        <div class="sent_msg">\n\
+                                        <span class="time_date_right" style="text-align: right"> you</span>  \n\
+                                        <p>' + message.value + '</p><span class="time_date_right" style="text-align: right"> add time</span> </div></div>';
+;
+ $("#msgHis").append(outMsg);
+  message.value = "";
+       
+        var subject = document.getElementById('uid').value;
+      var content =message.value;
+      var json = { 
+        'uid' : subject,
+        'toUid':1,
+        'content' : content
+      };
+      webSocket.send(JSON.stringify(json));
+              
+        
+        
+    }
+    function wsCloseConnection() {
+        webSocket.close();
+    }
+    function wsGetMessage(message) {
+        
+         var inMsg = '<div class="incoming_msg">\n\
+                                          <div class="received_msg">\n\
+                                          <div class="received_withd_msg">\n\
+                                          <span class="time_date">Them</span> \n\
+                                          <p>' + message + '</p>\n\
+                                          <span class="time_date"> add time </span></div>\n\
+                                          </div></div>';
+         $("#msgHis").append(inMsg);
+        
+    }
+    function wsClose(message) {
+        echoText.value += "Disconnect ... \n";
+    }
 
-    </div>
+    function wsError(message) {
+        echoText.value += "Error ... \n";
+    }
 
-    <!--  <form action="/action_page.php" class="form-container">
-        <h1>Chat</h1>
-    
-        <label for="msg"><b>Message</b></label>
-        <textarea placeholder="Type message.." name="msg" required></textarea>
-    
-        <button type="submit" class="btn">Send</button>
-        <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-      </form>-->
-</div>
+            </script>
+</s:if>
+
 
 

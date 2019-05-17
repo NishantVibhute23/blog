@@ -1,4 +1,8 @@
 
+import com.madhurisadgir.bean.UserSendChat;
+import com.madhurisadgir.dao.ChatDao;
+import com.madhurisadgir.dao.LoginDao;
+import com.madhurisadgir.util.CommonUtil;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -8,13 +12,19 @@ import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
+import org.codehaus.jackson.map.ObjectMapper;
 
 @ServerEndpoint("/ws/websocket")
 public class WsServer {
 
+    ChatDao chatDao = new ChatDao();
+    LoginDao loginDao = new LoginDao();
+
     @OnOpen
     public void onOpen() {
+
         System.out.println("Open Connection ...");
+
     }
 
     @OnClose
@@ -25,11 +35,22 @@ public class WsServer {
     @OnMessage
     public void onMessage(Session session, String message) {
         try {
-            //        System.out.println("Message from the client: " + message);
-//        String echoMsg = "Guru says : " + message;
-//        return echoMsg;
 
-            session.getBasicRemote().sendText("" + message);
+            ObjectMapper objectMapper = new ObjectMapper();
+            UserSendChat usc = objectMapper.readValue(message, UserSendChat.class);
+
+            if (usc.getContent().equals("Connected")) {
+                CommonUtil.userSession.put(usc.getUid(), session);
+            } else {
+
+                if (loginDao.isUserLoggedIn(usc.getToUid())) {
+                    CommonUtil.userSession.get(usc.getToUid()).getBasicRemote().sendText(usc.getContent());
+                }
+                chatDao.sendMessage(usc.getUid(), usc.getToUid(), usc.getContent());
+
+            }
+
+//            session.getBasicRemote().sendText("" + message);
         } catch (IOException ex) {
             Logger.getLogger(WsServer.class.getName()).log(Level.SEVERE, null, ex);
         }

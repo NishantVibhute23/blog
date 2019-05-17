@@ -6,10 +6,13 @@
 package com.madhurisadgir.util;
 
 import java.io.FileInputStream;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.websocket.Session;
 
 /**
  *
@@ -18,9 +21,11 @@ import java.util.logging.Logger;
 public class CommonUtil {
 
     public static Properties prop = new Properties();
+    public static Map<Integer, Session> userSession;
 
     public CommonUtil(String path) {
         try {
+            userSession = new HashMap<>();
             prop.load(new FileInputStream(path));
         } catch (Exception ex) {
             Logger.getLogger(CommonUtil.class.getName()).log(Level.SEVERE, null, ex);

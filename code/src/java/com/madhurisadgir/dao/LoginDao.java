@@ -119,4 +119,28 @@ public class LoginDao {
         return userBean;
     }
 
+    public boolean isUserLoggedIn(int id) {
+        boolean userId = false;
+
+        try {
+            con = db.getConnection();
+            PreparedStatement ps = con.prepareStatement("call CheckUserIsLoggedIn(?)");
+            ps.setInt(1, id);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                if (rs.getInt(1) == 1) {
+                    userId = true;
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            db.closeConnection(con);
+        }
+        return userId;
+    }
+
 }
