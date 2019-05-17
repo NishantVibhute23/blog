@@ -5,7 +5,9 @@
 <struts>
     <!-- Configuration for the default package. -->
     <constant name="struts.ui.theme" value="simple" />
-
+    
+     <constant name="struts.action.excludePattern" value="/ws/.*,ws://.*"/>
+    
     <include file="login.xml"/>
     <include file="contact.xml"/>
     <include file="InstaPay.xml"/>
@@ -109,6 +111,10 @@
             <result type="stream">
                 <param name="contentType">text/plain</param>
             </result>
+        </action>
+        
+        <action name="message" class="com.madhurisadgir.redirect.MessageAction" method="execute">
+        <result name="success">chatindex.jsp</result>
         </action>
 
     </package>
