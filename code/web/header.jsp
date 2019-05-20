@@ -186,11 +186,15 @@
         float: right;
         width: 46%;
     }
+    .msg_history {
+                height: 350px;
+                overflow-y: auto;
+            }
 </style>
 
 <script>
 
-    
+
 
 
     function showSignUp() {
@@ -208,6 +212,55 @@
 
     function openForm() {
         document.getElementById("myForm").style.display = "block";
+               
+           
+                var id = $("#uid").val();
+              
+                
+                $("#msgHis").empty();
+
+                $.ajax({
+                    url: 'getChatData?userId=' + id,
+                    type: "POST",
+                    dataType: 'json'
+                }).success(function (response) {
+
+
+                    $.each(response, function (index, value) {
+
+
+                        if (""+value.byUserId === ""+id)
+                        {
+                            var outMsg = '<div class="outgoing_msg">\n\
+                                        <div class="sent_msg">\n\
+                                        <span class="time_date_right" style="text-align: right"> you</span>  \n\
+                                        <p>' + value.mssg + '</p><span class="time_date_right" style="text-align: right">' + value.msgTime + ' | ' + value.msgDate + '</span> </div></div>';
+
+                            $("#msgHis").append(outMsg);
+
+                        } else {
+                            var inMsg = '<div class="incoming_msg">\n\
+                                          <div class="received_msg">\n\
+                                          <div class="received_withd_msg">\n\
+                                          <span class="time_date">' + value.toUserName + '</span> \n\
+                                          <p>' + value.mssg + '</p>\n\
+                                          <span class="time_date"> ' + value.msgTime + ' | ' + value.msgDate + '</span></div>\n\
+                                          </div></div>';
+
+                            $("#msgHis").append(inMsg);
+                        }
+
+                    });
+//                    map = {};
+
+                    var objDiv = document.getElementById("msgHis");
+                    objDiv.scrollTop = objDiv.scrollHeight;
+                });
+            
+             
+        
+        
+        
     }
 
     function closeForm() {
@@ -423,11 +476,7 @@
 
 <s:if test="#session.login">
     <s:if test="#session.userBean.userType == 2">
- 
-        
-        
         <img class="open-img" onclick="openForm()" src="visitors/img/chat-bubble.png"/>
-
         <div class="chat-popup" id="myForm">
             <div class="form-container">
                 <div class="win-head">
@@ -437,10 +486,7 @@
                 </div>
                 <div  class="win-area">
                     <div class="msg_history" id="msgHis">
-
-
-
-                            </div>
+                    </div>
                 </div>
                 <div  class="win-footer">
                     <div style="background-color: white;margin: 2px 2px 2px 2px;position: absolute;width: 99%;height: 45px">
@@ -451,109 +497,114 @@
                             <i onclick="wsSendMessage();" class="fa fa-paper-plane-o fa-lg" style="color: white;position: absolute;margin-top: 10px;margin-left: 6px" aria-hidden="true"></i>
                         </div>
                     </div>
-
-
                 </div>
-
             </div>
-
-            <!--  <form action="/action_page.php" class="form-container">
-                <h1>Chat</h1>
-            
-                <label for="msg"><b>Message</b></label>
-                <textarea placeholder="Type message.." name="msg" required></textarea>
-            
-                <button type="submit" class="btn">Send</button>
-                <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-              </form>-->
         </div>
-                    
-                           
-                    
-    </s:if>
-</s:if>
-        
-        
-<s:if test="#session.login">
+
         <script>
-           
+
             var webSocket = new WebSocket("ws://192.168.2.80:8084/madhurisadgir/ws/websocket");
-//    var echoText = document.getElementById("echoText");
-//    echoText.value = "";
-    var message = document.getElementById("message");
-    webSocket.onopen = function (message) {
-        var subject = document.getElementById('uid').value;
-      var content = "Connected";
-      var json = { 
-        'uid' : subject,
-        'content' : content
-      };
-      webSocket.send(JSON.stringify(json));
-        
-              
-//        wsOpen(message);
-       
-    };
-    webSocket.onmessage = function (message) {
-        wsGetMessage(message);
-    };
-    webSocket.onclose = function (message) {
-        wsClose(message);
-    };
-    webSocket.onerror = function (message) {
-        wsError(message);
-    };
-    function wsOpen(message) {
-        
-       alert("Connected ... \n");
-    }
-    function wsSendMessage() {
-       
-       var outMsg = '<div class="outgoing_msg">\n\
-                                        <div class="sent_msg">\n\
-                                        <span class="time_date_right" style="text-align: right"> you</span>  \n\
-                                        <p>' + message.value + '</p><span class="time_date_right" style="text-align: right"> add time</span> </div></div>';
-;
- $("#msgHis").append(outMsg);
-  message.value = "";
-       
-        var subject = document.getElementById('uid').value;
-      var content =message.value;
-      var json = { 
-        'uid' : subject,
-        'toUid':1,
-        'content' : content
-      };
-      webSocket.send(JSON.stringify(json));
-              
-        
-        
-    }
-    function wsCloseConnection() {
-        webSocket.close();
-    }
-    function wsGetMessage(message) {
-        
-         var inMsg = '<div class="incoming_msg">\n\
-                                          <div class="received_msg">\n\
-                                          <div class="received_withd_msg">\n\
-                                          <span class="time_date">Them</span> \n\
-                                          <p>' + message + '</p>\n\
-                                          <span class="time_date"> add time </span></div>\n\
-                                          </div></div>';
-         $("#msgHis").append(inMsg);
-        
-    }
-    function wsClose(message) {
-        echoText.value += "Disconnect ... \n";
-    }
+            var message = document.getElementById("message");
+            
+            webSocket.onopen = function (message) {
+                var subject = document.getElementById('uid').value;
+                var content = "Connected";
+                var json = {
+                    'uid': subject,
+                    'content': content
+                };
+                webSocket.send(JSON.stringify(json));
+            };
+            webSocket.onmessage = function (message) {
+                wsGetMessage(message);
+            };
+            webSocket.onclose = function (message) {
+                wsClose(message);
+            };
+            webSocket.onerror = function (message) {
+                wsError(message);
+            };
+            function wsOpen(message) {
 
-    function wsError(message) {
-        echoText.value += "Error ... \n";
-    }
+            }
+            function wsSendMessage() {
 
-            </script>
+                var outMsg = '<div class="outgoing_msg">\n\
+                        <div class="sent_msg">\n\
+                        <span class="time_date_right" style="text-align: right"> you</span>  \n\
+                        <p>' + message.value + '</p><span class="time_date_right" style="text-align: right"> add time</span> </div></div>';
+                ;
+                $("#msgHis").append(outMsg);
+                
+                var subject = document.getElementById('uid').value;
+                var content = message.value;
+                var json = {
+                    'chatRoomId':subject,
+                    'uid': subject,
+                    'toUid': 1,
+                    'content': content
+                };
+                webSocket.send(JSON.stringify(json));
+                message.value = "";
+                var objDiv = document.getElementById("msgHis");
+                    objDiv.scrollTop = objDiv.scrollHeight;
+            }
+            function wsCloseConnection() {
+                webSocket.close();
+            }
+            function wsGetMessage(message) {
+                var text = JSON.parse(message.data);
+                
+                
+                var x = document.getElementById("myForm");
+  if (window.getComputedStyle(x).display === "none") {
+    
+  }else{
+                
+                               
+                var inMsg = '<div class="incoming_msg">\n\
+                          <div class="received_msg">\n\
+                          <div class="received_withd_msg">\n\
+                          <span class="time_date">Them</span> \n\
+                          <p>' + text.content + '</p>\n\
+                          <span class="time_date"> add time </span></div>\n\
+                          </div></div>';
+                $("#msgHis").append(inMsg);
+                var objDiv = document.getElementById("msgHis");
+                    objDiv.scrollTop = objDiv.scrollHeight;
+                }
+            }
+            function wsClose(message) {
+//            echoText.value += "Disconnect ... \n";
+            }
+            function wsError(message) {
+//            echoText.value += "Error ... \n";
+            }
+
+        </script>
+
+
+
+    </s:if>
+    <s:else>
+        <script>
+            var webSocket = new WebSocket("ws://192.168.2.80:8084/madhurisadgir/ws/websocket");
+
+            webSocket.onopen = function (message) {
+
+                var content = "Connected";
+                var json = {
+                    'uid': 1,
+                    'content': content
+                };
+                webSocket.send(JSON.stringify(json));
+            };
+
+        </script>
+    </s:else>
 </s:if>
+
+
 
 
 

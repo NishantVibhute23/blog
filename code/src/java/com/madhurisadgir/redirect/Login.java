@@ -181,6 +181,7 @@ public class Login extends ActionSupport implements SessionAware, ServletRequest
 
         if (sessionMap != null) {
             UserBean userBean = (UserBean) sessionMap.get("userBean");
+            CommonUtil.userSession.remove(userBean.getUserId());
             loginDao.logOutUser(userBean);
             sessionMap.invalidate();
             messageBean.setSuccessMessage(CommonUtil.getResourceProperty("message.user.logout.success"));

@@ -13,6 +13,7 @@ public class UserSendChat {
 
     int uid;
     int toUid;
+    int chatRoomId;
     String content;
 
     public int getUid() {
@@ -37,6 +38,14 @@ public class UserSendChat {
 
     public void setToUid(int toUid) {
         this.toUid = toUid;
+    }
+
+    public int getChatRoomId() {
+        return chatRoomId;
+    }
+
+    public void setChatRoomId(int chatRoomId) {
+        this.chatRoomId = chatRoomId;
     }
 
 }

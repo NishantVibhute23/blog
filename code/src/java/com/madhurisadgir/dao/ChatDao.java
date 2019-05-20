@@ -70,6 +70,7 @@ public class ChatDao {
                 adminChat.setIsLoggedIn(rs.getInt(3) == 1 ? true : false);
                 adminChat.setLogoutTIme(rs.getString(4));
                 adminChat.setLastChatDate(rs.getString(5));
+                adminChat.setIsRead(rs.getInt(7));
                 mssgList.add(adminChat);
             }
 

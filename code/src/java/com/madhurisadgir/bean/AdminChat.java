@@ -17,6 +17,7 @@ public class AdminChat {
     private boolean isLoggedIn;
     private String logoutTIme;
     private String lastChatDate;
+    private int isRead;
 
     public int getChatId() {
         return chatId;
@@ -64,6 +65,14 @@ public class AdminChat {
 
     public void setLastChatDate(String lastChatDate) {
         this.lastChatDate = lastChatDate;
+    }
+
+    public int getIsRead() {
+        return isRead;
+    }
+
+    public void setIsRead(int isRead) {
+        this.isRead = isRead;
     }
 
 }

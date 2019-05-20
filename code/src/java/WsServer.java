@@ -44,13 +44,11 @@ public class WsServer {
             } else {
 
                 if (loginDao.isUserLoggedIn(usc.getToUid())) {
-                    CommonUtil.userSession.get(usc.getToUid()).getBasicRemote().sendText(usc.getContent());
+                    String text = objectMapper.writeValueAsString(usc);
+                    CommonUtil.userSession.get(usc.getToUid()).getBasicRemote().sendText(text);
                 }
-                chatDao.sendMessage(usc.getUid(), usc.getToUid(), usc.getContent());
-
+                chatDao.sendMessage(usc.getChatRoomId(), usc.getUid(), usc.getContent());
             }
-
-//            session.getBasicRemote().sendText("" + message);
         } catch (IOException ex) {
             Logger.getLogger(WsServer.class.getName()).log(Level.SEVERE, null, ex);
         }

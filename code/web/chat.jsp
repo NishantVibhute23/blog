@@ -200,10 +200,92 @@
 }
         </style>
 
+        
+
+    </head>
+    <body>	
+        <jsp:include page="/header.jsp" />
+
+
+        <!-- End banner Area -->				  
+
+        <!-- Start contact-page Area -->
+        <section class="contact-page-area section-gap-50">
+            <div class="container" style="margin-top: 50px">
+
+                <div class="messaging">
+                    <div class="inbox_msg">
+                        <div class="inbox_people">
+                            <div class="headind_srch">
+                                <div class="recent_heading">
+                                    <h4>Recent</h4>
+                                </div>
+
+                            </div>
+                            <div class="inbox_chat">
+
+                                <s:iterator value="adminChatList">
+
+                                    <div class="chat_list " onclick="getUserChat(<s:property value="userId"/>, '<s:property value="userName"/>',<s:property value="isLoggedIn"/>, '<s:property value="logoutTIme"/>')">
+                                        <div class="chat_people">
+                                            <div class="chat_img"> <img src="visitors/img/user-profile.png" > </div>
+                                            <div class="chat_ib">
+                                                <h5><s:property value="userName"/> <span class="chat_date"><s:property value="lastChatDate"/></span></h5>
+                                                    <s:if test="isLoggedIn">
+                                                    <span style="font: 14px arial, sans-serif;"><i class="fa fa-circle " style="color: green" aria-hidden="true"></i>&nbsp;&nbsp;Online</span>
+                                                </s:if>
+                                                <s:else>
+                                                    <span style="font: 14px arial, sans-serif;"><i class="fa fa-circle " style="color: red" aria-hidden="true"></i>&nbsp;&nbsp;offline since <s:property value="logoutTIme"/></span>
+                                                </s:else>
+                                                    <span id="messageic_<s:property value="userId"/>" style="font: 14px arial, sans-serif;float: right;color: blue;<s:if test="isRead==1">visibility: hidden;</s:if>"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </s:iterator>
+                            </div>
+                        </div>
+
+                        <div class="mesgs">
+
+
+                            <div style="padding: 10px 10px 0px 10px;width: auto"> 
+                                <div style="float: left;" class="incoming_msg_img"> <img src="visitors/img/user-profile.png"> </div> 
+                                <div >&nbsp;&nbsp;<span id="chatUserName"></span>  
+                                    <br> &nbsp;&nbsp;<i class="fa fa-circle " id="chatUserSymbol" style="color: white" aria-hidden="true"></i>&nbsp;&nbsp;<span style="font: 14px arial, sans-serif;" id="chatUserStatus"></span> </div>
+                            </div>
+                            <hr>
+
+                            <div class="msg_history" id="msgHis">
+
+
+
+                            </div>
+
+                            <div class="type_msg">
+                                <div class="input_msg_write">
+                                    <input type="hidden" id="userId"/>
+                                    <input type="text" id="message" class="write_msg" placeholder="Type a message" />
+                                    <button class="msg_send_btn" onclick="wsSendMessage()" type="button"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                </div></div>
+        </section>
+        <!-- End contact-page Area -->
+        <jsp:include page="/footer.jsp" />
+        
         <script>
             function getUserChat(id, name, status, time)
             {
-$("#userId").val(id);
+                $("#messageic_"+id).css("visibility", "hidden");
+                
+                $("#userId").val(id);
                 $('#chatUserName').text(name);
 
                 if (status === true)
@@ -250,133 +332,122 @@ $("#userId").val(id);
                     });
 //                    map = {};
 
-var objDiv = document.getElementById("msgHis");
-objDiv.scrollTop = objDiv.scrollHeight;
+                    var objDiv = document.getElementById("msgHis");
+                    objDiv.scrollTop = objDiv.scrollHeight;
                 });
             }
             
 
-     function sendMessage()
-            {
-                var id = $("#userId").val();
-                 var message = $("#message").val();
+//     function sendMessage()
+//            {
+//                var id = $("#userId").val();
+//                 var message = $("#message").val();
+//                
+//                $.ajax({
+//                    url: 'sendAdminMessage?userId=' + id+'&message='+message,
+//                    type: "POST",
+//                    dataType: 'json'
+//                }).success(function (response) {
+//                     $("#message").val("");
+//                     $("#msgHis").empty();
+//                    $.each(response, function (index, value) {
+//                        if (value.byUserId === 1)
+//                        {
+//                            var outMsg = '<div class="outgoing_msg">\n\
+//                                        <div class="sent_msg">\n\
+//                                        <span class="time_date_right" style="text-align: right"> you</span>  \n\
+//                                        <p>' + value.mssg + '</p><span class="time_date_right" style="text-align: right">' + value.msgTime + ' | ' + value.msgDate + '</span> </div></div>';
+//
+//                            $("#msgHis").append(outMsg);
+//
+//                        } else {
+//                            var inMsg = '<div class="incoming_msg">\n\
+//                                          <div class="received_msg">\n\
+//                                          <div class="received_withd_msg">\n\
+//                                          <span class="time_date">' + value.toUserName + '</span> \n\
+//                                          <p>' + value.mssg + '</p>\n\
+//                                          <span class="time_date"> ' + value.msgTime + ' | ' + value.msgDate + '</span></div>\n\
+//                                          </div></div>';
+//
+//                            $("#msgHis").append(inMsg);
+//                        }
+//
+//                    });
+//                     });
+//                }
+            
+            
+//            var webSocket = new WebSocket("ws://192.168.2.80:8084/madhurisadgir/ws/websocket");
+            var message = document.getElementById("message");
+            
+            
+            webSocket.onmessage = function (message) {
+                wsGetMessage(message);
+            };
+            webSocket.onclose = function (message) {
+                wsClose(message);
+            };
+            webSocket.onerror = function (message) {
+                wsError(message);
+            };
+           
+            function wsSendMessage() {
+
+                var outMsg = '<div class="outgoing_msg">\n\
+                        <div class="sent_msg">\n\
+                        <span class="time_date_right" style="text-align: right"> you</span>  \n\
+                        <p>' + message.value + '</p><span class="time_date_right" style="text-align: right"> add time</span> </div></div>';
+                ;
+                $("#msgHis").append(outMsg);
                 
-                $.ajax({
-                    url: 'sendAdminMessage?userId=' + id+'&message='+message,
-                    type: "POST",
-                    dataType: 'json'
-                }).success(function (response) {
-                     $("#message").val("");
-                     $("#msgHis").empty();
-                    $.each(response, function (index, value) {
-                        
-                        
-                        
+                var uid = document.getElementById('userId').value;
+                var content = message.value;
+                var json = {
+                    'chatRoomId':uid,
+                    'uid': 1,
+                    'toUid':uid,
+                    'content': content
+                };
+                webSocket.send(JSON.stringify(json));
+                message.value = "";
+                var objDiv = document.getElementById("msgHis");
+                    objDiv.scrollTop = objDiv.scrollHeight;
+            }
+            function wsCloseConnection() {
+                webSocket.close();
+            }
+            function wsGetMessage(message) {
+                var text = JSON.parse(message.data);
+                var uid = document.getElementById('userId').value;
+                console.log(text.uid +"="+uid);
+                if(""+uid == ""+text.uid)
+                {
+                    
+                var inMsg = '<div class="incoming_msg">\n\
+                          <div class="received_msg">\n\
+                          <div class="received_withd_msg">\n\
+                          <span class="time_date">Them</span> \n\
+                          <p>' + text.content + '</p>\n\
+                          <span class="time_date"> add time </span></div>\n\
+                          </div></div>';
+                $("#msgHis").append(inMsg);
+                var objDiv = document.getElementById("msgHis");
+                    objDiv.scrollTop = objDiv.scrollHeight;
+            }
+            else{
+                $("#messageic_"+text.uid).css("visibility", "visible");
+                 console.log(text.uid);
+            }
+            }
+            function wsClose(message) {
+//            echoText.value += "Disconnect ... \n";
+            }
+            function wsError(message) {
+//            echoText.value += "Error ... \n";
+            }
 
-                        if (value.byUserId === 1)
-                        {
-                            var outMsg = '<div class="outgoing_msg">\n\
-                                        <div class="sent_msg">\n\
-                                        <span class="time_date_right" style="text-align: right"> you</span>  \n\
-                                        <p>' + value.mssg + '</p><span class="time_date_right" style="text-align: right">' + value.msgTime + ' | ' + value.msgDate + '</span> </div></div>';
-
-                            $("#msgHis").append(outMsg);
-
-                        } else {
-                            var inMsg = '<div class="incoming_msg">\n\
-                                          <div class="received_msg">\n\
-                                          <div class="received_withd_msg">\n\
-                                          <span class="time_date">' + value.toUserName + '</span> \n\
-                                          <p>' + value.mssg + '</p>\n\
-                                          <span class="time_date"> ' + value.msgTime + ' | ' + value.msgDate + '</span></div>\n\
-                                          </div></div>';
-
-                            $("#msgHis").append(inMsg);
-                        }
-
-                    });
-                     });
-                }
             
             
         </script>
-
-    </head>
-    <body>	
-        <jsp:include page="/header.jsp" />
-
-
-        <!-- End banner Area -->				  
-
-        <!-- Start contact-page Area -->
-        <section class="contact-page-area section-gap-50">
-            <div class="container" style="margin-top: 50px">
-
-                <div class="messaging">
-                    <div class="inbox_msg">
-                        <div class="inbox_people">
-                            <div class="headind_srch">
-                                <div class="recent_heading">
-                                    <h4>Recent</h4>
-                                </div>
-
-                            </div>
-                            <div class="inbox_chat">
-
-                                <s:iterator value="adminChatList">
-
-                                    <div class="chat_list " onclick="getUserChat(<s:property value="userId"/>, '<s:property value="userName"/>',<s:property value="isLoggedIn"/>, '<s:property value="logoutTIme"/>')">
-                                        <div class="chat_people">
-                                            <div class="chat_img"> <img src="visitors/img/user-profile.png" > </div>
-                                            <div class="chat_ib">
-                                                <h5><s:property value="userName"/> <span class="chat_date"><s:property value="lastChatDate"/></span></h5>
-                                                    <s:if test="isLoggedIn">
-                                                    <span style="font: 14px arial, sans-serif;"><i class="fa fa-circle " style="color: green" aria-hidden="true"></i>&nbsp;&nbsp;Online</span>
-                                                </s:if>
-                                                <s:else>
-                                                    <span style="font: 14px arial, sans-serif;"><i class="fa fa-circle " style="color: red" aria-hidden="true"></i>&nbsp;&nbsp;offline since <s:property value="logoutTIme"/></span>
-                                                </s:else>
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </s:iterator>
-                            </div>
-                        </div>
-
-                        <div class="mesgs">
-
-
-                            <div style="padding: 10px 10px 0px 10px;width: auto"> 
-                                <div style="float: left;" class="incoming_msg_img"> <img src="visitors/img/user-profile.png"> </div> 
-                                <div >&nbsp;&nbsp;<span id="chatUserName"></span>  
-                                    <br> &nbsp;&nbsp;<i class="fa fa-circle " id="chatUserSymbol" style="color: white" aria-hidden="true"></i>&nbsp;&nbsp;<span style="font: 14px arial, sans-serif;" id="chatUserStatus"></span> </div>
-                            </div>
-                            <hr>
-
-                            <div class="msg_history" id="msgHis">
-
-
-
-                            </div>
-
-                            <div class="type_msg">
-                                <div class="input_msg_write">
-                                    <input type="hidden" id="userId"/>
-                                    <input type="text" id="message" class="write_msg" placeholder="Type a message" />
-                                    <button class="msg_send_btn" onclick="sendMessage()" type="button"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
-                </div></div>
-        </section>
-        <!-- End contact-page Area -->
-        <jsp:include page="/footer.jsp" />
     </body>
 </html>
