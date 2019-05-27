@@ -16,6 +16,7 @@ public class UserQueryBean {
     String userEmail;
     String messageSubject;
     String messageText;
+    String date;
 
     public int getId() {
         return id;
@@ -55,6 +56,14 @@ public class UserQueryBean {
 
     public void setMessageText(String messageText) {
         this.messageText = messageText;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
 }

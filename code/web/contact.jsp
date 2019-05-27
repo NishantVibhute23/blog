@@ -28,8 +28,11 @@
         <link rel="stylesheet" href="visitors/css/nice-select.css">							
         <link rel="stylesheet" href="visitors/css/animate.min.css">
         <link rel="stylesheet" href="visitors/css/owl.carousel.css">			
-        <link rel="stylesheet" href="visitors/css/jquery-ui.css">			
+        <!--<link rel="stylesheet" href="visitors/css/jquery-ui.css">-->			
         <link rel="stylesheet" href="visitors/css/main.css">
+        
+        		<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+		<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
     </head>
     <body>	
         <jsp:include page="/header.jsp" />
@@ -53,7 +56,46 @@
         <!-- Start contact-page Area -->
         <section class="contact-page-area section-gap-50">
             <div class="container">
-                
+                <s:if test="#session.login && #session.userBean.userType == 1">
+   <table cellpadding="0" cellspacing="0" border="0" class="datatable table table-striped table-bordered">
+					<thead>
+						<tr>
+							<th >Date</th>
+							<th>Name</th>
+							<th>Email Id</th>
+							<th>Subject</th>
+							<th>Message</th>
+						</tr>
+					</thead>
+					<tbody>
+                                            <s:iterator value="userQueries">
+                                                <tr class="gradeA">
+                                                    <td width="10%"><s:property value="date"/></td>
+							<td width="10%"><s:property value="userName"/></td>
+							<td width="20%"><s:property value="userEmail"/></td>
+							<td width="25%"><s:property value="messageSubject"/></td>
+							<td ><s:property value="messageText"/></td>
+						</tr>
+                                            </s:iterator>
+						
+						
+					</tbody>
+					
+				</table>
+   <script>
+   $(document).ready(function() {
+			$('.datatable').dataTable({
+                                  "searching": false,
+         "paging": true, 
+         "info": false,         
+         "lengthChange":false ,
+          "aaSorting": []
+                        });	
+			
+		});
+		</script>
+                </s:if>
+                <s:else>
                 <div class="row">
 
                     <div class="col-lg-4 d-flex flex-column address-wrap">
@@ -91,9 +133,9 @@
                         <form class="form-area contact-form text-right"  action="submitQuery" method="post">
                             <div class="row">	
                                 <div class="col-lg-6 form-group">
-                                    <input name="userQueryBean.userName" placeholder="Enter your name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'" class="common-input mb-20 form-control" required="" type="text">
+                                    <input name="userQueryBean.userName" placeholder="Enter your name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'" class="common-input mb-20 form-control" value="<s:if test="#session.login"><s:property value="#session.userBean.userName"/></s:if>"required="" type="text">
 
-                                    <input name="userQueryBean.userEmail" placeholder="Enter email address" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'" class="common-input mb-20 form-control" required="" type="email">
+                                    <input name="userQueryBean.userEmail" placeholder="Enter email address" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'" value="<s:if test="#session.login"><s:property value="#session.userBean.useremailId"/></s:if>"class="common-input mb-20 form-control" required="" type="email">
 
                                     <input name="userQueryBean.messageSubject" placeholder="Enter subject" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter subject'" class="common-input mb-20 form-control" required="" type="text">
                                 </div>
@@ -118,12 +160,22 @@
                         </form>	
                     </div>
                 </div>
+                </s:else>
+			
             </div>	
         </section>
         <!-- End contact-page Area -->
 
         <!-- start footer Area -->
         <jsp:include page="/footer.jsp" />
+        <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
+		<!--<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>-->
+                
+		<script src="//cdnjs.cloudflare.com/ajax/libs/datatables/1.9.4/jquery.dataTables.min.js"></script>
+		<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+		<script type="text/javascript">
+		
+                          
         <!-- End footer Area -->	
     </body>
 </html>

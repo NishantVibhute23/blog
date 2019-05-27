@@ -70,7 +70,7 @@
                             </div>
                         </div>
                     </div>-->
-                    <div class="col-lg-6 col-md-6">
+                    <div class="col-lg-4 col-md-4">
                         <div class="card text-center">
                             <div class="card-header">
                                 <h4>PAPER I</h4>
@@ -93,7 +93,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-6">
+                    <div class="col-lg-4 col-md-4">
                         <div class="card text-center">
                             <div class="card-header">
                                 <h4>PAPER II</h4>
@@ -110,6 +110,29 @@
                                 <s:else>
                                     <a href="#"  class="text-white" data-toggle="modal" data-target="#myModal">Start Test</a>
                                 </s:else>
+                            </div>
+                        </div>
+                    </div>
+<div class="col-lg-4 col-md-4">
+                        <div class="card text-center">
+                            <div class="card-header">
+                                <h4>PAPER III</h4>
+                            </div>
+                            <div class="card-body">
+                                
+                                <p class="card-text">5 Ques | 5 Min</p>
+                               
+                            </div>
+                            <div class="card-footer bg-info">
+                                
+                                <s:if test="isLoggedIn">
+                                    <a href="starttest?paperId=1" class="text-white">Start Test</a>
+                                </s:if>
+                                <s:else>
+                                    <a href="#" class="text-white" data-toggle="modal" data-target="#myModal">Start Test</a>
+                                </s:else>
+                                
+                                
                             </div>
                         </div>
                     </div>

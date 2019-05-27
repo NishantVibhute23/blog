@@ -10,6 +10,8 @@ import com.madhurisadgir.util.DBUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -42,6 +44,32 @@ public class ContactDao {
             db.closeConnection(con);
         }
         return id;
+    }
+
+    public List<UserQueryBean> getUserQueries() {
+        List<UserQueryBean> queryList = new ArrayList<>();
+        try {
+            con = db.getConnection();
+            PreparedStatement ps = con.prepareStatement("call getUserQueries()");
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                UserQueryBean qb = new UserQueryBean();
+                qb.setUserName(rs.getString(1));
+                qb.setUserEmail(rs.getString(2));
+                qb.setMessageSubject(rs.getString(3));
+                qb.setMessageText(rs.getString(4));
+                qb.setDate(rs.getString(5));
+                queryList.add(qb);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            db.closeConnection(con);
+        }
+        return queryList;
     }
 
 }

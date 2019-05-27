@@ -10,6 +10,8 @@ import com.madhurisadgir.bean.UserQueryBean;
 import com.madhurisadgir.dao.ContactDao;
 import com.madhurisadgir.util.CommonUtil;
 import com.opensymphony.xwork2.ActionSupport;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -20,8 +22,10 @@ public class Contact extends ActionSupport {
     ContactDao contactDao = new ContactDao();
     UserQueryBean userQueryBean = new UserQueryBean();
     MessageBean messageBean = new MessageBean();
+    List<UserQueryBean> userQueries = new ArrayList<>();
 
     public String execute() {
+        userQueries = contactDao.getUserQueries();
         return ActionSupport.SUCCESS;
     }
 
@@ -50,6 +54,14 @@ public class Contact extends ActionSupport {
 
     public void setMessageBean(MessageBean messageBean) {
         this.messageBean = messageBean;
+    }
+
+    public List<UserQueryBean> getUserQueries() {
+        return userQueries;
+    }
+
+    public void setUserQueries(List<UserQueryBean> userQueries) {
+        this.userQueries = userQueries;
     }
 
 }

@@ -58,7 +58,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <script src="visitors/js/vendor/jquery-2.2.4.min.js"></script>
 			<script src="visitors/js/popper.min.js"></script>
 			<script src="visitors/js/vendor/bootstrap.min.js"></script>			
-			<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>			
+					
   			<script src="visitors/js/easing.min.js"></script>			
 			<script src="visitors/js/hoverIntent.js"></script>
 			<script src="visitors/js/superfish.min.js"></script>	
