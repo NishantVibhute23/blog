@@ -115,6 +115,14 @@
         <action name="subsNewsLetter" class="com.madhurisadgir.redirect.NewsLetter" method="subscribeUser">
             <result name="success" type="redirect">home</result>
         </action>
+        
+        <action name="newsletter" class="com.madhurisadgir.redirect.NewsLetter" >
+            <result name="success" >newsletter.jsp</result>
+        </action>
+        
+         <action name="sendNewsLetter" class="com.madhurisadgir.redirect.NewsLetter" method="sendNewsLetter">
+            <result name="success" type="redirect">newsletter</result>
+        </action>
 
     </package>
 </struts>

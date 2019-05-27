@@ -12,6 +12,7 @@
 <link rel="icon" type="image/png" href="visitors/img/icons/favicon.ico"/>
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css" href="visitors/vendor/bootstrap/css/bootstrap.min.css">
+
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css" href="visitors/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 <!--===============================================================================================-->
@@ -306,6 +307,12 @@
                     <s:if test="#session.login">
                         <s:if test="#session.userBean.userType == 1">
                             <li><a href="chat">Chat</a></li>
+                            </s:if>
+                        </s:if>
+                            
+                            <s:if test="#session.login">
+                        <s:if test="#session.userBean.userType == 1">
+                            <li><a href="newsletter">Newsletter</a></li>
                             </s:if>
                         </s:if>
 

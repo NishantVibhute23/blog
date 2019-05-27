@@ -22,8 +22,8 @@ import javax.mail.internet.MimeMessage;
 public class EmailUtil {
 
     private String email;
-    private final String from = "";
-    private final String password = "";
+    private final String from = "dev.test.nishant@gmail.com";
+    private final String password = "Musu30@in";
     private String to;
     private String subject;
 

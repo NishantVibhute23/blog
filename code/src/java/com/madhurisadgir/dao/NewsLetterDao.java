@@ -5,11 +5,12 @@
  */
 package com.madhurisadgir.dao;
 
-import com.madhurisadgir.bean.PageDetail;
 import com.madhurisadgir.util.DBUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -57,6 +58,24 @@ public class NewsLetterDao {
             db.closeConnection(con);
         }
         return emailExist;
+    }
+
+    public List<String> getEmailIds() {
+        List<String> count = new ArrayList<>();
+        try {
+            con = db.getConnection();
+            PreparedStatement ps = con.prepareStatement("call getSubscribedNewsLetterEmailIds()");
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                count.add(rs.getString(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            db.closeConnection(con);
+        }
+        return count;
     }
 
 }
