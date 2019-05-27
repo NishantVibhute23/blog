@@ -5,9 +5,9 @@
 <struts>
     <!-- Configuration for the default package. -->
     <constant name="struts.ui.theme" value="simple" />
-    
-     <constant name="struts.action.excludePattern" value="/ws/.*,ws://.*"/>
-    
+
+    <constant name="struts.action.excludePattern" value="/ws/.*,ws://.*"/>
+
     <include file="login.xml"/>
     <include file="contact.xml"/>
     <include file="InstaPay.xml"/>
@@ -42,7 +42,7 @@
         <action name="deleteQualification" class="com.madhurisadgir.redirect.About" method="deleteQualification">
             <result name="success" type="chain">about</result>
         </action>
-        
+
 
         <action name="portfolio" class="com.madhurisadgir.redirect.Portfolio" >
             <result name="success">portfolio.jsp</result>
@@ -69,7 +69,7 @@
             <result name="success" type="chain">home</result>
 
         </action>
-        
+
         <action name="uploadMyPhoto" class="com.madhurisadgir.redirect.FileUploadAction" method="uploadMyPhotos" >
             <interceptor-ref name="fileUpload">
                 <param name="maximumSize">2097152</param>
@@ -82,12 +82,12 @@
             <result name="success" type="chain">about</result>
 
         </action>
-        
-        
+
+
         <action name="updateDesc" class="com.madhurisadgir.redirect.Home" method="updateDesc">
             <result name="success" type="chain">home</result>
         </action>
-        
+
         <action name="updateDescFromAboutPage" class="com.madhurisadgir.redirect.About" method="updateDescFromAboutPage">
             <result name="success" type="chain">about</result>
         </action>
@@ -97,21 +97,24 @@
         </action>
 
 
-<action name="chat" class="com.madhurisadgir.redirect.Chat">
+        <action name="chat" class="com.madhurisadgir.redirect.Chat">
             <result name="success" >chat.jsp</result>
         </action>
 
-<action name="getChatData" class="com.madhurisadgir.redirect.Chat" method="getUserChat">
+        <action name="getChatData" class="com.madhurisadgir.redirect.Chat" method="getUserChat">
             <result type="stream">
                 <param name="contentType">text/plain</param>
             </result>
         </action>
-        
+
         <action name="sendAdminMessage" class="com.madhurisadgir.redirect.Chat" method="adminSendMessage">
             <result type="stream">
                 <param name="contentType">text/plain</param>
             </result>
         </action>
-        
+        <action name="subsNewsLetter" class="com.madhurisadgir.redirect.NewsLetter" method="subscribeUser">
+            <result name="success" type="redirect">home</result>
+        </action>
+
     </package>
 </struts>
