@@ -25,7 +25,7 @@
             </result>
         </action>
 
-        <action name="services" class="com.madhurisadgir.redirect.Services" >
+        <action name="services" class="com.madhurisadgir.redirect.NetSetService" >
             <result name="success">services.jsp</result>
         </action>
 

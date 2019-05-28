@@ -51,104 +51,123 @@
         <!-- End banner Area -->	
 
         <!-- Start services Area -->
-        <section class="services-area section-gap">
+        <section class="services-area section-gap-50" style="background-color: #f9f9ff">
             <div class="container">
 
                 <div class="row">
-<!--                    <div class="col-lg-4 col-md-6">
+                    <div class="col-lg-6 col-md-6">
                         <div class="card text-center">
                             <div class="card-header">
-                                <h4>GENERAL</h4>
+                                <h4>NET</h4>
                             </div>
                             <div class="card-body">
                                 
-                                <p class="card-text">5 Ques | 5 Min</p>
-                               
-                            </div>
-                            <div class="card-footer bg-info">
-                                <a href="#" class="text-white">Start Test</a>
-                            </div>
-                        </div>
-                    </div>-->
-                    <div class="col-lg-4 col-md-4">
-                        <div class="card text-center">
-                            <div class="card-header">
-                                <h4>PAPER I</h4>
-                            </div>
-                            <div class="card-body">
-                                
-                                <p class="card-text">5 Ques | 5 Min</p>
+                                <p align="justify" class="card-text">The National Eligibility Test (NET), also known as UGC NET or NTA-UGC-NET, is a test to determine eligibility for college and university level lecturership and for the award of Junior Research Fellowship (JRF) for Indian nationals. It aims to ensure minimum standards for the entrants in teaching professions and research. On behalf of the University Grants Commission (UGC), the National Testing Agency (NTA) conducts the test for determining the eligibility of Indian nationals for the Eligibility for Assistant Professor only or Junior Research Fellowship and Eligibility for Assistant Professor both in Indian universities and colleges.</p>
                                
                             </div>
                             <div class="card-footer bg-info">
                                 
-                                <s:if test="isLoggedIn">
-                                    <a href="starttest?paperId=1" class="text-white">Start Test</a>
-                                </s:if>
-                                <s:else>
-                                    <a href="#" class="text-white" data-toggle="modal" data-target="#myModal">Start Test</a>
-                                </s:else>
+                               
+                                    <a href="newsetdetail?type=NET" class="text-white">View</a>
+                                
                                 
                                 
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-4">
+                    <div class="col-lg-6 col-md-6">
                         <div class="card text-center">
                             <div class="card-header">
-                                <h4>PAPER II</h4>
+                                <h4>SET</h4>
                             </div>
                             <div class="card-body">
                                 
-                                <p class="card-text">5 Ques | 5 Min</p>
+                                <p class="card-text" align="justify">The University Grants Commission (U.G.C.), while prescribing the revised pay scale for teachers in colleges and in universities, in accordance with the Fourth Pay Commission, has prescribed that the person being appointed as Assistant Professor shall qualify for the new scales provided he/she clears, the Eligibility Test, to be conducted by the U.G.C., in addition to the minimum qualifications already prescribed. The U.G.C., accordingly conducts, the National Educational Tests (N.E.T.), for many subjects. The U.G.C. and the C.S.I.R.(Council for Scientific and Industrial Research) conduct combined tests for science subjects. The NET or the combined Tests enables the candidate to receive the Junior Research Fellowship (J.R.F.) of the U.G.C./C.S.I.R. and/or makes him/her eligible for being appointed as Assistant Professor. In view of the fact that the number of candidates who are required to be qualified for being appointed as Assistant Professors, under the new pay scales, is fairly large, the U.G.C. has authorised the State Governments or the State Agencies on behalf of the State Governments to conduct the State Eligibility Test(SET) for Assistant Professor, provided, the SET is duly accredited by the U.G.C.</p>
                                
                             </div>
                             <div class="card-footer bg-info">
-                                <s:if test="isLoggedIn">
-                                    <a href="starttest?paperId=2" class="text-white">Start Test</a>
-                                </s:if>
-                                <s:else>
-                                    <a href="#"  class="text-white" data-toggle="modal" data-target="#myModal">Start Test</a>
-                                </s:else>
-                            </div>
-                        </div>
-                    </div>
-<div class="col-lg-4 col-md-4">
-                        <div class="card text-center">
-                            <div class="card-header">
-                                <h4>PAPER III</h4>
-                            </div>
-                            <div class="card-body">
-                                
-                                <p class="card-text">5 Ques | 5 Min</p>
                                
-                            </div>
-                            <div class="card-footer bg-info">
-                                
-                                <s:if test="isLoggedIn">
-                                    <a href="starttest?paperId=1" class="text-white">Start Test</a>
-                                </s:if>
-                                <s:else>
-                                    <a href="#" class="text-white" data-toggle="modal" data-target="#myModal">Start Test</a>
-                                </s:else>
-                                
+                                    <a href="newsetdetail?type=SET" class="text-white">View</a>
                                 
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>	
         </section>
-        <!-- End services Area -->				
-
-
-
-
-
-
-
-
+        <!-- End services Area -->	
+        
+        <!-- Start price Area -->
+        <section class="price-area section-gap">
+            <div class="container">
+                <div class="row d-flex justify-content-center">
+                    <div class="menu-content pb-70 col-lg-8">
+                        <div class="title text-center">
+                            <h1 class="mb-10">Choose Your Plan</h1>
+                            <p>Select the Plan which is best for you</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row d-flex justify-content-center" >
+                    <div class="col-lg-3 col-md-6 single-price col-lg-offset-1">
+                        <div class="top-part">
+                            <h1 class="package-no">01</h1>
+                            <h4>NET</h4>
+                            <p class="mt-10">Access to all papers of NET</p>
+                        </div>
+                        <div class="package-list">
+                            <ul>
+                                <li>Paper I </li>
+                                <li>Paper II</li>
+                                <li>Paper III</li>
+                            </ul>
+                        </div>
+                        <div class="bottom-part">
+                            <h1>&#x20b9;199.00</h1>
+                            <a class="price-btn text-uppercase" href="#">Buy Now</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 single-price">
+                        <div class="top-part">
+                            <h1 class="package-no">02</h1>
+                            <h4>SET</h4>
+                            <p class="mt-10">Access to all papers of SET</p>
+                        </div>
+                        <div class="package-list">
+                            <ul>
+                                <li>Paper I </li>
+                                <li>Paper II</li>
+                                <li>Paper III</li>
+                            </ul>
+                        </div>
+                        <div class="bottom-part">
+                            <h1>&#x20b9;299.00</h1>
+                            <a class="price-btn text-uppercase" href="#">Buy Now</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 single-price">
+                        <div class="top-part">
+                            <h1 class="package-no">03</h1>
+                            <h4>NET SET Combo</h4>
+                            <p class="mt-10">Access to all papers of NET And SET</p>
+                        </div>
+                        <div class="package-list">
+                            <ul>
+                               <li>Paper I </li>
+                                <li>Paper II</li>
+                                <li>Paper III</li>
+                            </ul>
+                        </div>
+                        <div class="bottom-part">
+                            <h1>&#x20b9;399.00</h1>
+                            <a class="price-btn text-uppercase" href="#">Buy Now</a>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+        <!-- End price Area -->
 
           <!-- start footer Area -->
             <jsp:include page="/footer.jsp" />

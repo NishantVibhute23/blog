@@ -64,6 +64,7 @@
                             </div>
                             <div class="card-body">
                                 <s:form action="submitTest">
+                                    <input type="hidden" name="paperId" value="<s:property value="paperId"/>"/>
                                     <input type="hidden" id="currentQuestionId" value="1"/>
 
                                     <s:iterator value="questionBeanList">

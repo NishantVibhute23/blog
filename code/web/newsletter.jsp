@@ -112,7 +112,7 @@
                 <form action="sendNewsLetter" method="post">
                     <div class="row">
                         <div class="col-md-4" style="padding: 0px">
-                            <div class="box box-primary">
+                            <div class="box box-primary" style="padding-left: 5px;padding-right: 5px">
                                 <div class="box-header with-border">
                                     <h4 style="float: left;margin-top: 7px" class="box-title">Send To</h4>
                                     <div style="float: Right">

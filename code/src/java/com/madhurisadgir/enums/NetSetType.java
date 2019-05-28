@@ -48,4 +48,12 @@ public enum NetSetType {
         return null;
     }
 
+    public static int getEnumByName(String code) {
+        for (NetSetType e : NetSetType.values()) {
+            if (code.equalsIgnoreCase(e.getText())) {
+                return e.getId();
+            }
+        }
+        return 0;
+    }
 }

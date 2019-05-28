@@ -118,7 +118,7 @@
                         <img class="img-fluid" src="<s:url action='ImageAction'><s:param name="imageId"><s:property value="home.image"/></s:param></s:url>" alt="" />
                         <s:if test="#session.login">
                             <s:if test="#session.userBean.userType == 1">
-                                <div class="buttonP"><a href="#" class="open-uploadDialog" data-id="1" data-toggle="modal" data-target="#myModal"> CHANGE PHOTO </a></div>
+                                <div class="buttonP"><a href="#" class="open-uploadDialog" data-id="1" data-toggle="modal" data-target="#myModalChangePhoto"> CHANGE PHOTO </a></div>
                             </s:if>
                         </s:if>
 
@@ -139,7 +139,7 @@
                         <s:if test="#session.login">
                             <s:if test="#session.userBean.userType == 1">
                                 <div class="buttonP">
-                                    <a href="#" data-id="2" class="open-uploadDialog" data-toggle="modal" data-target="#myModal"> CHANGE PHOTO </a>
+                                    <a href="#" data-id="2" class="open-uploadDialog" data-toggle="modal" data-target="#myModalChangePhoto"> CHANGE PHOTO </a>
                                 </div>
                             </s:if>
                         </s:if>
@@ -547,7 +547,7 @@
         </section>
         <!-- end recent-blog Area -->
 
-        <div class="modal" id="myModal">
+        <div class="modal" id="myModalChangePhoto">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
 

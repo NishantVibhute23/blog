@@ -13,7 +13,7 @@ public enum PaperType {
 
     PaperI(1, "Paper I"),
     PaperII(2, "Paper II"),
-    General(3, "General");
+    PaperIII(3, "Paper III");
 
     private int id;
     private String text;
