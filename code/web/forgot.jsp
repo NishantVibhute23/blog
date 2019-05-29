@@ -19,18 +19,19 @@
             </s:if>
             <s:else>
                 <div class="label">Enter Registered Mail</div>
-                <div class="input-field"><s:textfield name="userBean.useremailId" required="required"/></div>
+                <div class="input-field"><s:textfield onkeyup="ValidateEmailID(this);" name="userBean.useremailId" required="required"/></div>
             </div>
             <div class="login-button">
-                <a href="javascript:document.forms[0].submit();"><div class="button-login">OK </div></a>
-
+                <s:submit><div class="button-login">OK </div></s:submit>
+                </div>
             </div>
-        </div>
     </s:else>
 
 </div>
 </div>
 
 </s:form>
+
+<script src="js/validation.js"></script>
 </body>
 </html>

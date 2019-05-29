@@ -57,16 +57,21 @@ public class Login extends ActionSupport implements SessionAware, ServletRequest
     }
 
     public String createUser() {
+        String returntype = ActionSupport.ERROR;
         HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
         backurl = request.getHeader("referer");
-
-        int id = loginDao.createUser(userBean);
-        String returntype = ActionSupport.ERROR;
-        if (id != 0) {
-            messageBean.setSuccessMessage(CommonUtil.getResourceProperty("message.user.create.success"));
-            returntype = ActionSupport.SUCCESS;
+        UserBean ub = loginDao.isUserExist(userBean.getUseremailId());
+        if (ub == null) {
+            int id = loginDao.createUser(userBean);
+            if (id != 0) {
+                messageBean.setSuccessMessage(CommonUtil.getResourceProperty("message.user.create.success"));
+                returntype = ActionSupport.SUCCESS;
+            } else {
+                messageBean.setErrorMessage(CommonUtil.getResourceProperty("message.user.create.failure"));
+                returntype = ActionSupport.ERROR;
+            }
         } else {
-            messageBean.setSuccessMessage(CommonUtil.getResourceProperty("message.user.create.failure"));
+            messageBean.setErrorMessage(CommonUtil.getResourceProperty("message.user.exist"));
             returntype = ActionSupport.ERROR;
         }
         return returntype;
@@ -84,7 +89,7 @@ public class Login extends ActionSupport implements SessionAware, ServletRequest
             sessionMap.put("userBean", userBean1);
             returntype = ActionSupport.SUCCESS;
         } else {
-            messageBean.setSuccessMessage(CommonUtil.getResourceProperty("message.user.login.failure"));
+            messageBean.setErrorMessage(CommonUtil.getResourceProperty("message.user.login.failure"));
             returntype = ActionSupport.ERROR;
         }
         return returntype;
