@@ -103,9 +103,9 @@
                 // it is unnecessary to have to manually call the modal.
                 // $('#addBookDialog').modal('show');
             });
-            
-            
-            
+
+
+
             $(document).on("click", ".open-photoDialog-delete", function () {
                 var courseId = $(this).data('id');
 
@@ -248,14 +248,14 @@
                     <div class="menu-content pb-20 col-lg-8">
                         <div class="title text-center">
                             <h1 class="mb-10">My Photos <s:if test="#session.login">
-                                <s:if test="#session.userBean.userType == 1">
-                                    <a   href="#" class="open-uploadDialog-edit" data-toggle="modal" data-target="#myModalUploadPhoto" >
+                                    <s:if test="#session.userBean.userType == 1">
+                                        <a   href="#" class="open-uploadDialog-edit" data-toggle="modal" data-target="#myModalUploadPhoto" >
 
-                                        <i title="ADD NEW" class="fa fa-plus-square-o "  style="color: green" aria-hidden="true"></i>
-                                    </a>
+                                            <i title="ADD NEW" class="fa fa-plus-square-o "  style="color: green" aria-hidden="true"></i>
+                                        </a>
+                                    </s:if>
                                 </s:if>
-                            </s:if>
-                        </h1>
+                            </h1>
                             <hr>
                         </div>
                     </div>
@@ -272,20 +272,20 @@
                                         <div class="overlay overlay-bg"></div>
                                         <img class="image img-fluid" src="<s:url action='ImageAction'><s:param name="imageId"><s:property /></s:param></s:url>" alt="">
                                             </div>
-                                            <a href="<s:url action='ImageAction'><s:param name="imageId"><s:property /></s:param></s:url>" class="img-pop-up">	
+                                            <a href="<s:url action='ImageAction'><s:param name="imageId"><s:property /></s:param></s:url>" class="img-pop-up">
                                                 <div class="middle">
                                                     <div class="text align-self-center d-flex"><img src="visitors/img/preview.png" alt=""></div>
                                                 </div>
-                                            </a>                              		
+                                            </a>
                                         </div>
                                         <div class="p-inner">
                                     <s:if test="#session.login">
-                                <s:if test="#session.userBean.userType == 1">
-                                    <a   href="#" data-id="<s:property />" class="open-photoDialog-delete" data-toggle="modal" data-target="#myModalPhotoDelete">
-                                            <i title="DELETE" class="fa fa-trash fa-lg" style="color: red" aria-hidden="true"></i>
-                                        </a>
-                                </s:if>
-                            </s:if>
+                                        <s:if test="#session.userBean.userType == 1">
+                                            <a   href="#" data-id="<s:property />" class="open-photoDialog-delete" data-toggle="modal" data-target="#myModalPhotoDelete">
+                                                <i title="DELETE" class="fa fa-trash fa-lg" style="color: red" aria-hidden="true"></i>
+                                            </a>
+                                        </s:if>
+                                    </s:if>
                                 </div>
 
                             </div>
@@ -366,9 +366,9 @@
 
                     <!-- Modal body -->
                     <div class="modal-body">
-                        <s:form action="uploadImage" method="post" enctype="multipart/form-data">
+                        <s:form action="uploadImage" method="post" enctype="multipart/form-data" onsubmit="return Validate(this);">
                             <s:hidden name="uploadId" id="uploadId"/>
-                            <s:file name="userImage" label="Image" />
+                            <s:file name="userImage" label="Image" id="upLoadFile" />
 
                         </div>
 
@@ -477,7 +477,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
 
-                        <h4 class="modal-title">Are you sure?</h4>	
+                        <h4 class="modal-title">Are you sure?</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
                     <s:form action="deleteQualification">
@@ -495,14 +495,14 @@
                     </s:form>
                 </div>
             </div>
-        </div>     
-        
+        </div>
+
         <div id="myModalPhotoDelete" class="modal fade">
             <div class="modal-dialog modal-confirm">
                 <div class="modal-content">
                     <div class="modal-header">
 
-                        <h4 class="modal-title">Are you sure?</h4>	
+                        <h4 class="modal-title">Are you sure?</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
                     <s:form action="deletePhoto">
@@ -520,7 +520,7 @@
                     </s:form>
                 </div>
             </div>
-        </div>     
+        </div>
 
         <div class="modal" id="myModalUploadPhoto">
             <div class="modal-dialog modal-lg">
@@ -537,19 +537,19 @@
                         <s:form action="uploadMyPhoto" method="post" enctype="multipart/form-data">
                             <s:hidden name="uploadId" id="uploadId"/>
                             <s:file name="userImage" label="Image" />
-                                                  
-                    </div>
 
-                    <!-- Modal footer -->
-                    <div class="modal-footer" style="justify-content: center !important">
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer" style="justify-content: center !important">
                             <s:submit  cssClass="btn btn-primary" value="Upload" align="center" />
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                         </div>
- </s:form>
+                    </s:form>
                 </div>
             </div>
         </div>
-        
+
         <!-- start footer Area -->
         <jsp:include page="/footer.jsp" />
         <!-- End footer Area -->
@@ -557,5 +557,6 @@
         <script>
             baguetteBox.run('.tz-gallery');
         </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
     </body>
 </html>

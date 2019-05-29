@@ -58,7 +58,7 @@
                         </span>
 
                         <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-                            <input class="input100" type="text" name="userBean.useremailId" placeholder="Email">
+                            <input class="input100" onkeyup="ValidateEmailID(this);" type="text" name="userBean.useremailId" placeholder="Email" required="required">
                             <span class="focus-input100"></span>
                             <span class="symbol-input100">
                                 <i class="fa fa-envelope" aria-hidden="true"></i>
@@ -112,9 +112,9 @@
         <!--===============================================================================================-->
         <script src="visitors/vendor/tilt/tilt.jquery.min.js"></script>
         <script >
-            $('.js-tilt').tilt({
-                scale: 1.1
-            })
+                                $('.js-tilt').tilt({
+                                    scale: 1.1
+                                })
         </script>
         <!--===============================================================================================-->
         <script src="visitors/js/main_login.js"></script>
@@ -137,6 +137,7 @@
         <script src="visitors/js/owl.carousel.min.js"></script>
         <script src="visitors/js/mail-script.js"></script>
         <script src="visitors/js/main.js"></script>
+        <script src="js/validation.js"></script>
 
     </body>
 </html>

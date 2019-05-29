@@ -28,7 +28,7 @@
                     <div class="" id="mc_embed_signup">
                         <form action="subsNewsLetter" method="post">
                             <div class="input-group">
-                                <input type="text" class="form-control" name="email" placeholder="Enter Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email Address '" required="" type="email">
+                                <input type="text" onkeyup="ValidateEmailID(this);" class="form-control" name="email" placeholder="Enter Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email Address '" required="" type="email">
                                 <div class="input-group-btn">
                                     <button class="btn btn-default" type="submit">
                                         <span class="lnr lnr-arrow-right"></span>
@@ -57,20 +57,21 @@
 </footer>
 
 <script src="visitors/js/vendor/jquery-2.2.4.min.js"></script>
-			<script src="visitors/js/popper.min.js"></script>
-			<script src="visitors/js/vendor/bootstrap.min.js"></script>			
-					
-  			<script src="visitors/js/easing.min.js"></script>			
-			<script src="visitors/js/hoverIntent.js"></script>
-			<script src="visitors/js/superfish.min.js"></script>	
-			<script src="visitors/js/jquery.ajaxchimp.min.js"></script>
-			<script src="visitors/js/jquery.magnific-popup.min.js"></script>	
-    		<script src="visitors/js/jquery.tabs.min.js"></script>						
-			<script src="visitors/js/jquery.nice-select.min.js"></script>	
-            <script src="visitors/js/isotope.pkgd.min.js"></script>			
-			<script src="visitors/js/waypoints.min.js"></script>
-			<script src="visitors/js/jquery.counterup.min.js"></script>
-			<script src="visitors/js/simple-skillbar.js"></script>							
-			<script src="visitors/js/owl.carousel.min.js"></script>							
-			<script src="visitors/js/mail-script.js"></script>	
-			<script src="visitors/js/main.js"></script>	
+<script src="visitors/js/popper.min.js"></script>
+<script src="visitors/js/vendor/bootstrap.min.js"></script>
+
+<script src="visitors/js/easing.min.js"></script>
+<script src="visitors/js/hoverIntent.js"></script>
+<script src="visitors/js/superfish.min.js"></script>
+<script src="visitors/js/jquery.ajaxchimp.min.js"></script>
+<script src="visitors/js/jquery.magnific-popup.min.js"></script>
+<script src="visitors/js/jquery.tabs.min.js"></script>
+<script src="visitors/js/jquery.nice-select.min.js"></script>
+<script src="visitors/js/isotope.pkgd.min.js"></script>
+<script src="visitors/js/waypoints.min.js"></script>
+<script src="visitors/js/jquery.counterup.min.js"></script>
+<script src="visitors/js/simple-skillbar.js"></script>
+<script src="visitors/js/owl.carousel.min.js"></script>
+<script src="visitors/js/mail-script.js"></script>
+<script src="visitors/js/main.js"></script>
+<script src="js/validation.js"></script>
