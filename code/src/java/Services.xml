@@ -7,18 +7,28 @@
 <struts>
     <package name="Services"  extends="struts-default">
 
-        <action name="netsettest" class="com.madhurisadgir.redirect.Services" method="netSetExam" >
+        <action name="netsettest" class="com.madhurisadgir.redirect.NetSetService" method="netSetExam" >
             <result name="success">pages/service/netsetdetail.jsp</result>
             <result name="login" type="chain">login</result>
         </action>
 
-        <action name="starttest" class="com.madhurisadgir.redirect.Services" method="startTest" >
+        <action name="starttest" class="com.madhurisadgir.redirect.NetSetService" method="startTest" >
             <result name="success">pages/service/online_net_set_test.jsp</result>
         </action>
 
-        <action name="submitTest" class="com.madhurisadgir.redirect.Services" method="submitTest" >
+        <action name="submitTest" class="com.madhurisadgir.redirect.NetSetService" method="submitTest" >
             <result name="success">pages/service/online_net_set_test.jsp</result>
         </action>
+        
+        <action name="newsetdetail" class="com.madhurisadgir.redirect.NetSetService" method="redirectNetSet" >
+            <result name="success">pages/service/netsetpackage.jsp</result>
+        </action>
+        
+             
+        <action name="uploadQuestions" class="com.madhurisadgir.redirect.NetSetService" method="uploadQuestions" >
+            <result name="success">pages/service/netsetpackage.jsp</result>
+        </action>
+        
     </package>
 
 </struts>
