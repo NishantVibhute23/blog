@@ -7,26 +7,53 @@
 <struts>
     <package name="Services"  extends="struts-default">
 
-        <action name="netsettest" class="com.madhurisadgir.redirect.NetSetService" method="netSetExam" >
-            <result name="success">pages/service/netsetdetail.jsp</result>
+        <action name="netsettest" class="com.madhurisadgir.redirect.services.NetSetService" method="netSetExam" >
+            <result name="success">pages/service/netsetservice/netsetdetail.jsp</result>
             <result name="login" type="chain">login</result>
         </action>
 
-        <action name="starttest" class="com.madhurisadgir.redirect.NetSetService" method="startTest" >
-            <result name="success">pages/service/online_net_set_test.jsp</result>
+        <action name="starttest" class="com.madhurisadgir.redirect.services.NetSetService" method="startTest" >
+            <result name="success">pages/service/netsetservice/online_net_set_test.jsp</result>
         </action>
 
-        <action name="submitTest" class="com.madhurisadgir.redirect.NetSetService" method="submitTest" >
-            <result name="success">pages/service/online_net_set_test.jsp</result>
+        <action name="submitTest" class="com.madhurisadgir.redirect.services.NetSetService" method="submitTest" >
+            <result name="success">pages/service/netsetservice/online_net_set_test.jsp</result>
         </action>
         
-        <action name="newsetdetail" class="com.madhurisadgir.redirect.NetSetService" method="redirectNetSet" >
-            <result name="success">pages/service/netsetpackage.jsp</result>
+        <action name="newsetdetail" class="com.madhurisadgir.redirect.services.NetSetService" method="redirectNetSet" >
+            <result name="success">pages/service/netsetservice/netsetpackage.jsp</result>
         </action>
         
-             
-        <action name="uploadQuestions" class="com.madhurisadgir.redirect.NetSetService" method="uploadQuestions" >
-            <result name="success">pages/service/netsetpackage.jsp</result>
+        <action name="uploadQuestions" class="com.madhurisadgir.redirect.services.NetSetService" method="uploadQuestions" >
+            <result name="success">pages/service/netsetservice/netsetpackage.jsp</result>
+        </action>
+        
+        
+        <action name="asktheexpert" class="com.madhurisadgir.redirect.services.AskExpert"  >
+            <result name="success">pages/service/askexpert/askexpert.jsp</result>
+        </action>
+        
+        
+        
+        <action name="addNewExpertArea" class="com.madhurisadgir.redirect.services.AskExpert" method="addNewExpertArea" >
+            <result name="success" type="chain">asktheexpert</result>
+        </action>
+        
+        <action name="expertareadetail" class="com.madhurisadgir.redirect.services.AskExpert" method="getExpertAreaDetail" >
+            <result name="success" >pages/service/askexpert/forumexpert.jsp</result>
+        </action>
+        
+        
+        
+        <action name="deleteArea" class="com.madhurisadgir.redirect.services.AskExpert" method="deleteArea" >
+            <result name="success" type="chain">asktheexpert</result>
+        </action>
+        
+        
+        
+        
+        <action name="editArea" class="com.madhurisadgir.redirect.services.AskExpert" method="editArea" >
+            <result name="success" type="chain">asktheexpert</result>
         </action>
         
     </package>

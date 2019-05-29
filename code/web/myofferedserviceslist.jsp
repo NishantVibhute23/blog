@@ -37,8 +37,8 @@
             </div>
             <div class="col-lg-4 col-md-6">
                 <div class="single-services">
-                    <span class="lnr lnr-camera"></span>
-                    <a href="#"><h4>Photography</h4></a>
+                    <span class="lnr lnr-users"></span>
+                    <a href="asktheexpert"><h4>Ask The Expert</h4></a>
                     <p>
                         Do you want to be even more successful? Learn to love learning and growth. The more effort you put into improving your skills.
                     </p>
