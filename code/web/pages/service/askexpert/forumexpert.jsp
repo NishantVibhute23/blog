@@ -107,6 +107,8 @@
             #accordion .panel-body p {
                 border-left: 1px dashed #8c8c8c;
                 padding-left: 25px;
+             border-right: 1px dashed #8c8c8c;
+            padding-right: 25px;
             }
         </style>
 
@@ -150,19 +152,24 @@
                 <div class="row d-flex justify-content-center">
                     <div class="menu-content  col-lg-7">
                         <div class="title text-center">
+                            <form action="addExpertQuestion" method="post">
                             <h2 class="mb-30">How Can We Help You?</h2>
                             <div class="row d-flex justify-content-center">
                                 <div class="col-xs-10 col-md-10">
                                     <div class="input-group" style="margin-bottom: 20px" >
-                                        <input type="text" class="form-control" placeholder="Ask Your Question" id="txtSearch"/>
+                                        
+                                        <input type="text" name="expertQestionBean.question" class="form-control" placeholder="Ask Your Question" id="txtSearch"/>
+                                        <input type="hidden" value="<s:property value="areaBean.id"	/>" name="expertQestionBean.areaId"/>
                                         <div class="input-group-btn">
                                             <button class="btn btn-primary" type="submit">
                                                 <i class="fa fa-send-o" ></i>
                                             </button>
                                         </div>
+                                       
                                     </div>
                                 </div>
                             </div>
+                             </form>
                         </div>
                     </div>
                 </div>	
@@ -170,63 +177,25 @@
                 <div class="row">				
                     <div class="col-md-12">
                         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                            
+                            <s:iterator value="expertQuestionList"> 
                             <div class="panel panel-default">
-                                <div class="panel-heading" role="tab" id="headingTwo">
+                                <div class="panel-heading" role="tab" id="heading<s:property value="qid"/>">
                                     <h4 class="panel-title">
-                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                            Why Titanic best? 
+                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse<s:property value="qid"/>" aria-expanded="false" aria-controls="collapseTwo">
+                                           <s:property value="question"/>
                                         </a>
                                     </h4>
                                 </div>
-                                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                <div id="collapse<s:property value="qid"/>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<s:property value="qid"/>">
                                     <div class="panel-body">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nisl lorem, dictum id pellentesque at, vestibulum ut arcu. Curabitur erat libero, egestas eu tincidunt ac, rutrum ac justo. Vivamus condimentum laoreet lectus, blandit posuere tortor aliquam vitae. Curabitur molestie eros.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nisl lorem, dictum id pellentesque at, vestibulum ut arcu. Curabitur erat libero, egestas eu tincidunt ac, rutrum ac justo. Vivamus condimentum laoreet lectus, blandit posuere tortor aliquam vitae. Curabitur molestie eros. </p>
+                                        <s:iterator value="answers"> 
+                                            <p align="justify"><s:property/></p>
+                                            <hr>
+                                        </s:iterator>
                                     </div>
                                 </div>
                             </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading" role="tab" id="headingThree">
-                                    <h4 class="panel-title">
-                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                            How to apply Titanic jobs? 
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                                    <div class="panel-body">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nisl lorem, dictum id pellentesque at, vestibulum ut arcu. Curabitur erat libero, egestas eu tincidunt ac, rutrum ac justo. Vivamus condimentum laoreet lectus, blandit posuere tortor aliquam vitae. Curabitur molestie eros.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nisl lorem, dictum id pellentesque at, vestibulum ut arcu. Curabitur erat libero, egestas eu tincidunt ac, rutrum ac justo. Vivamus condimentum laoreet lectus, blandit posuere tortor aliquam vitae. Curabitur molestie eros. </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading" role="tab" id="headingFour">
-                                    <h4 class="panel-title">
-                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                            How experts Titanic team member? 
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
-                                    <div class="panel-body">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nisl lorem, dictum id pellentesque at, vestibulum ut arcu. Curabitur erat libero, egestas eu tincidunt ac, rutrum ac justo. Vivamus condimentum laoreet lectus, blandit posuere tortor aliquam vitae. Curabitur molestie eros.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nisl lorem, dictum id pellentesque at, vestibulum ut arcu. Curabitur erat libero, egestas eu tincidunt ac, rutrum ac justo. Vivamus condimentum laoreet lectus, blandit posuere tortor aliquam vitae. Curabitur molestie eros. </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading" role="tab" id="headingFive">
-                                    <h4 class="panel-title">
-                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                                            How Titanic give customer support? 
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
-                                    <div class="panel-body">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nisl lorem, dictum id pellentesque at, vestibulum ut arcu. Curabitur erat libero, egestas eu tincidunt ac, rutrum ac justo. Vivamus condimentum laoreet lectus, blandit posuere tortor aliquam vitae. Curabitur molestie eros.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nisl lorem, dictum id pellentesque at, vestibulum ut arcu. Curabitur erat libero, egestas eu tincidunt ac, rutrum ac justo. Vivamus condimentum laoreet lectus, blandit posuere tortor aliquam vitae. Curabitur molestie eros. </p>
-                                    </div>
-                                </div>
-                            </div>
+                            </s:iterator>
                         </div>
                     </div><!--- END COL -->		
                 </div><!--- END ROW -->	

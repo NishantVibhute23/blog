@@ -123,6 +123,7 @@
          <action name="sendNewsLetter" class="com.madhurisadgir.redirect.NewsLetter" method="sendNewsLetter">
             <result name="success" type="redirect">newsletter</result>
         </action>
+        
 
     </package>
 </struts>

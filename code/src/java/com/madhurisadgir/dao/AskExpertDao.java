@@ -6,6 +6,8 @@
 package com.madhurisadgir.dao;
 
 import com.madhurisadgir.bean.AreaBean;
+import com.madhurisadgir.bean.ExpertQestionBean;
+import com.madhurisadgir.bean.ExpertSubmitAnswer;
 import com.madhurisadgir.bean.ExpertiesBean;
 import com.madhurisadgir.util.DBUtil;
 import java.sql.Connection;
@@ -151,6 +153,135 @@ public class AskExpertDao {
             ps.setString(2, areaBean.getName());
             ps.setString(3, areaBean.getDesc());
             ps.executeQuery();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            db.closeConnection(con);
+        }
+
+    }
+
+    public int addExpertQuestion(ExpertQestionBean eqb, int userId) {
+        int id = 0;
+        try {
+            con = db.getConnection();
+            PreparedStatement ps = con.prepareStatement("call insertExpertQusetion(?,?,?)");
+            ps.setString(1, eqb.getQuestion());
+            ps.setInt(2, userId);
+            ps.setInt(3, eqb.getAreaId());
+            ResultSet rs1 = ps.executeQuery();
+
+            while (rs1.next()) {
+                id = rs1.getInt(1);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            db.closeConnection(con);
+        }
+        return id;
+
+    }
+
+    public List<ExpertQestionBean> getUserExpertQuestion(int userId, int areaId) {
+        List<ExpertQestionBean> expertQestionBeans = new ArrayList<>();
+        int qid = 0;
+        try {
+            con = db.getConnection();
+            PreparedStatement ps = con.prepareStatement("call getUserExpertQuestions(?,?)");
+            ps.setInt(1, userId);
+            ps.setInt(2, areaId);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                ExpertQestionBean expertQestionBean = new ExpertQestionBean();
+                qid = rs.getInt(1);
+                expertQestionBean.setQid(rs.getInt(1));
+                expertQestionBean.setQuestion(rs.getString(2));
+
+                List<String> answerBeans = new ArrayList<>();
+                PreparedStatement ps1 = con.prepareStatement("call getExpertQestionAnswer(?)");
+                ps1.setInt(1, qid);
+                ResultSet rs1 = ps1.executeQuery();
+
+                while (rs1.next()) {
+
+                    answerBeans.add(rs1.getString(1));
+                }
+                expertQestionBean.setAnswers(answerBeans);
+                expertQestionBeans.add(expertQestionBean);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            db.closeConnection(con);
+        }
+        return expertQestionBeans;
+
+    }
+
+    public List<ExpertiesBean> getExpertiesGuidOfQuestion(int questionId) {
+        List<ExpertiesBean> expertiesBeans = new ArrayList<>();
+        try {
+            con = db.getConnection();
+
+            PreparedStatement ps1 = con.prepareStatement("call getExpertiesGuidOfQuestion(?)");
+            ps1.setInt(1, questionId);
+            ResultSet rs1 = ps1.executeQuery();
+
+            while (rs1.next()) {
+                ExpertiesBean expertiesBean = new ExpertiesBean();
+
+                expertiesBean.setName(rs1.getString(1));
+                expertiesBean.setEmailId(rs1.getString(2));
+                expertiesBean.setGuid(rs1.getString(3));
+                expertiesBeans.add(expertiesBean);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            db.closeConnection(con);
+        }
+        return expertiesBeans;
+    }
+
+    public ExpertSubmitAnswer getQuestionBasedOnGuid(String guid) {
+        ExpertSubmitAnswer expertSubmitAnswer = new ExpertSubmitAnswer();
+        try {
+            con = db.getConnection();
+
+            PreparedStatement ps1 = con.prepareStatement("call getQuestionBasedOnGuid(?)");
+            ps1.setString(1, guid);
+            ResultSet rs1 = ps1.executeQuery();
+
+            while (rs1.next()) {
+                expertSubmitAnswer.setId(rs1.getInt(1));
+                expertSubmitAnswer.setQuestion(rs1.getString(2));
+                expertSubmitAnswer.setGuid(guid);
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            db.closeConnection(con);
+        }
+        return expertSubmitAnswer;
+    }
+
+    public void submitExpertAnswer(ExpertSubmitAnswer expertSubmitAnswer) {
+
+        try {
+            con = db.getConnection();
+
+            PreparedStatement ps1 = con.prepareStatement("call submitExpertAnswer(?,?)");
+            ps1.setInt(1, expertSubmitAnswer.getId());
+            ps1.setString(2, expertSubmitAnswer.getAnswer());
+            ps1.executeQuery();
 
         } catch (Exception e) {
             e.printStackTrace();

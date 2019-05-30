@@ -46,8 +46,8 @@
             </div>
             <div class="col-lg-4 col-md-6">
                 <div class="single-services">
-                    <span class="lnr lnr-picture"></span>
-                    <a href="#"><h4>Clipping Path</h4></a>
+                    <span class="lnr lnr-camera-video"></span>
+                    <a href="video"><h4>Videos</h4></a>
                     <p>
                         Hypnosis quit smoking methods maintain caused quite a stir in the medical world over the last two decades. There is a lot of argument.
                     </p>

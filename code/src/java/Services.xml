@@ -43,19 +43,32 @@
             <result name="success" >pages/service/askexpert/forumexpert.jsp</result>
         </action>
         
-        
-        
         <action name="deleteArea" class="com.madhurisadgir.redirect.services.AskExpert" method="deleteArea" >
             <result name="success" type="chain">asktheexpert</result>
         </action>
-        
-        
-        
         
         <action name="editArea" class="com.madhurisadgir.redirect.services.AskExpert" method="editArea" >
             <result name="success" type="chain">asktheexpert</result>
         </action>
         
+        <action name="addExpertQuestion" class="com.madhurisadgir.redirect.services.AskExpert" method="addExpertQuestion" >
+            <result name="success" type="chain">asktheexpert</result>
+        </action>
+        
+        <action name="reply" class="com.madhurisadgir.redirect.services.AskExpert" method="getExpertQuestionToShow" >
+            <result name="success" >pages/service/askexpert/expertsubmitanswer.jsp</result>
+             <result name="error" >pages/service/askexpert/expertthankyou.jsp</result>
+        </action>
+        
+        <action name="submitExpertAnswer" class="com.madhurisadgir.redirect.services.AskExpert" method="submitExpertAnswer" >
+            <result name="success" >pages/service/askexpert/expertthankyou.jsp</result>
+        </action>
+        
+        
+        
+         <action name="video" class="com.madhurisadgir.redirect.services.Video" >
+            <result name="success" >pages/service/videos/videos.jsp</result>
+        </action>
     </package>
 
 </struts>

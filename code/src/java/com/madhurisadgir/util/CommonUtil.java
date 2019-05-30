@@ -22,6 +22,7 @@ public class CommonUtil {
 
     public static Properties prop = new Properties();
     public static Map<Integer, Session> userSession;
+    public static String templatePath;
 
     public CommonUtil(String path) {
         try {

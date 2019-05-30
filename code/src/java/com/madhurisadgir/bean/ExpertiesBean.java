@@ -14,6 +14,7 @@ public class ExpertiesBean {
     int id;
     String name;
     String emailId;
+    String guid;
 
     public int getId() {
         return id;
@@ -37,6 +38,14 @@ public class ExpertiesBean {
 
     public void setEmailId(String emailId) {
         this.emailId = emailId;
+    }
+
+    public String getGuid() {
+        return guid;
+    }
+
+    public void setGuid(String guid) {
+        this.guid = guid;
     }
 
 }

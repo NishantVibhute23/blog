@@ -22,7 +22,7 @@ public class ServletContextLis implements ServletContextListener {
     public void contextInitialized(ServletContextEvent contextEvent) {
         System.out.println("Context Created");
         CommonUtil commonUtil = new CommonUtil(contextEvent.getServletContext().getRealPath("/") + "WEB-INF/classes/com/madhurisadgir/properties/resources.properties");
-
+        CommonUtil.templatePath = contextEvent.getServletContext().getRealPath("/") + "WEB-INF/classes/com/madhurisadgir/template/";
     }
 
     @Override
